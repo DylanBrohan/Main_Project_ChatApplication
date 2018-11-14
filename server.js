@@ -1,0 +1,29 @@
+//takes in the dependencies
+const express = require("express");
+const mongoose = require("mongoose");
+
+// Routing to the files in the API folder
+const users = require("./routes/api/users");
+const profile = require("./routes/api/profile");
+const post = require("./routes/api/post");
+
+const app = express();
+
+//Database Config variable - key.js
+const db = require("./config/keys").mongoURI;
+
+// Connects to mongoDB, passes in db variable
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
+app.get("/", (req, res) => res.send("test")); //Route takes in 2 parametres and directs to home page
+// Uses Routes
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/post", post);
+
+const port = process.env.PORT || 5000; //listen to port 5000 localhost
+
+app.listen(port, () => console.log(`server running on port ${port}`)); // listens on the port and consoles the result, passes in the port(5000)

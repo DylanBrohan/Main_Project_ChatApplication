@@ -1,0 +1,41 @@
+{
+  "name": "mainproject_application",
+  "version": "1.0.0",
+  "description": "Social Media Application with Recommendation System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DylanBrohan/Main_Project_ChatApplication.git"
+  },
+  "keywords": [
+    "Artificial",
+    "Intelligence",
+    "Chat",
+    "Application",
+    "Mern",
+    "Stack"
+  ],
+  "author": "Dylan Brohan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DylanBrohan/Main_Project_ChatApplication/issues"
+  },
+  "homepage": "https://github.com/DylanBrohan/Main_Project_ChatApplication#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.11",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
