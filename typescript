@@ -1,0 +1,17 @@
+Script started on Wed Nov 28 00:11:15 2018
+[?1034hbash-3.2$ run script
+bash: run: command not found
+bash-3.2$ node script
+module.js:540
+    throw err;
+    ^
+
+Error: Cannot find module '/Users/dylan/Desktop/MainProject_Application/script'
+    at Function.Module._resolveFilename (module.js:538:15)
+    at Function.Module._load (module.js:468:25)
+    at Function.Module.runMain (module.js:684:10)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3
+bash-3.2$ run server
+bash: run: command not found
+bash-3.2$ 
