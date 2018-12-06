@@ -18,23 +18,24 @@ module.exports = function validateRegisterInput(data) {
     errors.name = "Name Field is required";
   }
 
-  if (Validator.isEmail(data.email)) {
-    errors.email = "Email is Not Valid";
-  }
-
   if (Validator.isEmpty(data.email)) {
     errors.email = "Email Field is required";
+  }
+
+  if (!Validator.isEmail(data.email)) {
+    errors.email = "Email is Not Valid";
   }
 
   if (Validator.isEmpty(data.password)) {
     errors.password = "Password Field is required";
   }
 
-  if (Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password Length Insuffecient Needs to be atlea";
+  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
+    errors.password =
+      "Password Length Insuffecient Needs to be atleast 6 charecters";
   }
 
-  if (Validator.equals(data.password, data.password2)) {
+  if (!Validator.equals(data.password, data.password2)) {
     errors.password2 = "Passwords Must Match";
   }
 
