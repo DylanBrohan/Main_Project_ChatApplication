@@ -7,7 +7,7 @@ const passport = require("passport");
 // Routing to the files in the API folder
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
-const post = require("./routes/api/post");
+const posts = require("./routes/api/posts");
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.get("/", (req, res) => res.send("test")); //Route takes in 2 parametres and 
 // Uses Routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
-app.use("/api/post", post);
+app.use("/api/posts", posts);
 
 const port = process.env.PORT || 5000; //listen to port 5000 localhost
 
