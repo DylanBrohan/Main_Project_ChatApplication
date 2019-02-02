@@ -29,7 +29,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.get("/", (req, res) => res.send("test")); //Route takes in 2 parametres and directs to home page
-// Uses Routes
+// User Routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);

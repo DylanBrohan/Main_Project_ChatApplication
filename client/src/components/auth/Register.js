@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import axios from "axios";
+// Prop Types
+import PropTypes from "prop-types";
 import classnames from "classnames";
+
+import { withRouter } from "react-router-dom";
+// connects redux to this component
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+
 // Main Register page
 class Register extends Component {
   constructor() {
@@ -18,6 +25,18 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Check for an error prop
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   //   Whenever user types, set the state variables
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -32,18 +51,14 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    // Axios requst to register Database
-    axios
-      // Api endpoint in routes
-      .post("/api/users/register", newUser)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({ errors: err.response.data }));
+    // any actions is called through props
+    // History allows to redirect within the action
+    this.props.registerUser(newUser, this.props.history);
   }
   //   <-- Register -->
   render() {
     // If we have errors
     const { errors } = this.state;
-
     return (
       <div className="register">
         <div className="container">
@@ -121,7 +136,7 @@ class Register extends Component {
                       // Is-invalid class, only if errors.password exists in the state
                       "form-control form-control-lg",
                       {
-                        "is-invalid": errors.password
+                        "is-invalid": errors.password2
                       }
                     )}
                     placeholder="Confirm Password"
@@ -142,5 +157,20 @@ class Register extends Component {
     );
   }
 }
-
-export default Register;
+// Mapping all prop types
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+// putting auth state inside a property called auth for easy access
+const mapStateToProps = state => ({
+  // comes from rootReducer
+  auth: state.auth,
+  errors: state.errors
+});
+// maps actions in component Register
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
