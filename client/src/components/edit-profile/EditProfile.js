@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { createProfile } from "../../actions/profileActions";
-
+// Uses same Profile action as CreateProfile
+import { createProfile, getCurrentProfile } from "../../actions/profileActions";
+// IsEmpty Function
+import isEmpty from "../../validation/is-empty";
 // Input Components
 import TextFieldGroup from "../common/textFieldGroup";
 
@@ -39,14 +41,82 @@ class CreateProfile extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    //   Fetches profile when the component loads
+    this.props.getCurrentProfile();
+  }
+  //   This will run with the received props (CurrentUser)
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+    // Profile state & profile object
+    // Check for profile & set this variable to profile for easy access
+    if (nextProps.profile.profile) {
+      const profile = nextProps.profile.profile;
+      //   Brings Skills array back to a CSV
+      const skillsCSV = profile.skills.join(",");
+
+      //   if profile field doesnt exist, make an empty string
+      // If its there will be used if not return an empty string
+      profile.company = !isEmpty(profile.company) ? profile.company : "";
+
+      profile.website = !isEmpty(profile.website) ? profile.website : "";
+
+      profile.location = !isEmpty(profile.location) ? profile.location : "";
+
+      profile.githubusername = !isEmpty(profile.githubusername)
+        ? profile.githubusername
+        : "";
+      profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
+
+      // Social is an Array so must be treated like an empty string
+      profile.social = !isEmpty(profile.social) ? profile.social : {};
+      // All are contained within profile-social-
+      profile.twitter = !isEmpty(profile.social.twitter)
+        ? profile.social.twitter
+        : "";
+
+      profile.facebook = !isEmpty(profile.social.facebook)
+        ? // If it exists it will be the result
+          profile.social.facebook
+        : // if not its an empty string
+          "";
+
+      profile.linkedin = !isEmpty(profile.social.linkedin)
+        ? profile.social.linkedin
+        : "";
+
+      profile.youtube = !isEmpty(profile.social.youtube)
+        ? profile.social.youtube
+        : "";
+
+      profile.instagram = !isEmpty(profile.social.instagram)
+        ? profile.social.instagram
+        : "";
+
+      // Sets Component Fields state
+      this.setState({
+        handle: profile.handle,
+        company: profile.company,
+        website: profile.website,
+        location: profile.location,
+        status: profile.status,
+        skills: skillsCSV,
+        githubusername: profile.githubusername,
+        bio: profile.bio,
+        twitter: profile.twitter,
+        facebook: profile.facebook,
+        linkedin: profile.linkedin,
+        youtube: profile.youtube,
+        instagram: profile.instagram
+      });
     }
   }
   onSubmit(e) {
     e.preventDefault();
     // Has All the profile fields
+    // Gets everything in the form
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,
@@ -63,6 +133,7 @@ class CreateProfile extends Component {
       instagram: this.state.instagram
     };
     // Redux actions are always in the Props
+    // Then calls create profile
     this.props.createProfile(profileData, this.props.history);
   }
 
@@ -137,7 +208,7 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
+              <h1 className="display-4 text-center">Edit Profile</h1>
               <p className="lead text-center">
                 Add Information to make your profile
               </p>
@@ -246,6 +317,9 @@ CreateProfile.propTypes = {
 
 // Maps the state to the Field
 const mapStateToProps = state => ({
+  // current profile will get mapped to props
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: state.profile,
   // Listens for the errors state, in the Errors Reducer
   errors: state.errors
@@ -253,5 +327,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, getCurrentProfile }
 )(withRouter(CreateProfile));
