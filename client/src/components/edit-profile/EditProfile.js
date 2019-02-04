@@ -55,7 +55,7 @@ class CreateProfile extends Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
       //   Brings Skills array back to a CSV
-      const skillsCSV = profile.skills.join(",");
+      const skillsCSV = profile.skills.join("");
 
       //   if profile field doesnt exist, make an empty string
       // If its there will be used if not return an empty string

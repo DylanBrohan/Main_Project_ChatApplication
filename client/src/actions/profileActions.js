@@ -62,7 +62,20 @@ export const clearCurrentProfile = () => {
     type: CLEAR_CURRENT_PROFILE
   };
 };
-
+// Add Experience
+export const addExperience = (expData, history) => dispatch => {
+  axios
+    // Pass along expData
+    .post("/api/profile/experience", expData)
+    // If Successfule redirect to dashboard
+    .then(res => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // Delete Account & Profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you Sure?")) {
