@@ -76,6 +76,22 @@ export const addExperience = (expData, history) => dispatch => {
       })
     );
 };
+
+// Add Education
+export const addEducation = (eduData, history) => dispatch => {
+  axios
+    // Pass along expData
+    .post("/api/profile/education", eduData)
+    // If Successfule redirect to dashboard
+    .then(res => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Delete Account & Profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you Sure?")) {
