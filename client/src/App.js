@@ -20,10 +20,12 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import AddExperience from "./components/add-credentials/AddExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
+// Profile Components
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
-
 import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profile/Profile";
+
 // Private Route Component
 import PrivateRoute from "./components/common/PrivateRoute";
 
@@ -66,6 +68,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:handle" component={Profile} />
             {/* Switch allows to redirect when logout is clicked */}
 
             <Switch>

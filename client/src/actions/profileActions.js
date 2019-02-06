@@ -9,6 +9,29 @@ import {
   CLEAR_CURRENT_PROFILE,
   SET_CURRENT_USER
 } from "./types";
+// Get profile by Handle
+// Get current profile
+export const getProfileByHandle = handle => dispatch => {
+  // sets the loading state while getting data
+  dispatch(setProfileLoading());
+  //   Request to Server
+  axios
+    .get(`/api/profile/handle${handle}`)
+    .then(res =>
+      dispatch({
+        //   if it finds a profile it passes along the data to the Profile Reducer
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    //   if there isnt a profile return empty object
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: {}
+      })
+    );
+};
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {

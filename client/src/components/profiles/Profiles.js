@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 // Components
 import Spinner from "../common/Spinner";
 import { getProfiles } from "../../actions/profileActions";
+import ProfileItem from "./ProfileItem";
 
 class Profiles extends Component {
   // When the page runs call getProfiles
@@ -22,7 +23,10 @@ class Profiles extends Component {
     } else {
       // if there is profiles run else load h4
       if (profiles.length > 0) {
-        profileItems = <h1>Yay</h1>;
+        // Map profiles that are coming through the state
+        profileItems = profiles.map(profile => (
+          <ProfileItem key={profile._id} profile={profile} />
+        ));
       } else {
         profileItems = <h4>No Profiles Found</h4>;
       }
