@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
+// Actions
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
+
+// Components
 import Spinner from "../common/Spinner";
 import { Link } from "react-router-dom";
 import ProfileActions from "./ProfileActions";
 import Experience from "./Experience";
+import Education from "./Education";
 class Dashboard extends Component {
   // life cycle method
   componentDidMount() {
@@ -39,7 +44,9 @@ class Dashboard extends Component {
             </p>
             {/* DashBoard Buttons */}
             <ProfileActions />
-            <Experience />
+            {/* Sends in the array of experiences */}
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
             <div style={{ marginBottom: "60px" }} />
             <button
               onClick={this.onDeleteClick.bind(this)}

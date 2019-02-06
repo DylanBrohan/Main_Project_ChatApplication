@@ -92,6 +92,46 @@ export const addEducation = (eduData, history) => dispatch => {
     );
 };
 
+// Delete Experience
+export const deleteExperience = id => dispatch => {
+  axios
+    // Pass along expData
+    .delete(`/api/profile/experience/${id}`)
+    // If Successfule redirect to dashboard
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Education
+export const deleteEducation = id => dispatch => {
+  axios
+    // Pass along expData
+    .delete(`/api/profile/education/${id}`)
+    // If Successfule redirect to dashboard
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Delete Account & Profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you Sure?")) {
