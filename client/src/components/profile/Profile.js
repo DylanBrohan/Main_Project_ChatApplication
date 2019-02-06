@@ -14,16 +14,48 @@ import { getProfileByHandle } from "../../actions/profileActions";
 class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params);
+      this.props.getProfileByHandle(this.props.match.params.handle);
     }
   }
   render() {
+    //   Checks
+    // Using destructuring to take out the profile from state
+
+    const { profile, loading } = this.props.profile;
+    let profileContent;
+
+    if (profile === null || loading) {
+      profileContent = <Spinner />;
+    } else {
+      profileContent = (
+        <div>
+          <div className="row">
+            <div className="col-md-6">
+              <Link to="/profiles" className="btn btn-light mb-3 float-left">
+                Back to Profiles
+              </Link>
+            </div>
+            <div classname="col-md-6" />
+          </div>
+          {/* Getting the data from this component */}
+          <ProfileHeader profile={profile} />
+          <ProfileAbout profile={profile} />
+          <ProfileCreds
+            education={profile.education}
+            experience={profile.experience}
+          />
+          <ProfileGithub />
+        </div>
+      );
+    }
+
     return (
-      <div>
-        <ProfileHeader />
-        <ProfileAbout />
-        <ProfileCreds />
-        <ProfileGithub />
+      <div className="profile">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">{profileContent}</div>
+          </div>
+        </div>
       </div>
     );
   }
