@@ -8,9 +8,7 @@ import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 // Input Components
 import TextFieldGroup from "../common/textFieldGroup";
-
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 

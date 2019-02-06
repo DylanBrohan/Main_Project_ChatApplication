@@ -1,9 +1,12 @@
+// Brings in From the Actions
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE
 } from "../actions/types";
 
+// Sets initialState
 const initialState = {
   profile: null,
   profiles: null,
@@ -24,6 +27,14 @@ export default function(state = initialState, action) {
         ...state,
         // payload passed from profileAction - payload goes from null - that user
         profile: action.payload,
+        loading: false
+      };
+    case GET_PROFILES:
+      return {
+        //   Current state
+        ...state,
+        // payload passed from profileAction - payload goes from null - that user
+        profiles: action.payload,
         loading: false
       };
     case CLEAR_CURRENT_PROFILE:

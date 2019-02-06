@@ -3,6 +3,7 @@
 import axios from "axios";
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_LOADING,
   GET_ERRORS,
   CLEAR_CURRENT_PROFILE,
@@ -88,6 +89,28 @@ export const addEducation = (eduData, history) => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    );
+};
+
+// Get all Profiles
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    // Pass along expData
+    .get("/api/profile/all")
+    // If Successfule redirect to dashboard
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
+        // Pass in data which is an array of profiles
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
       })
     );
 };
