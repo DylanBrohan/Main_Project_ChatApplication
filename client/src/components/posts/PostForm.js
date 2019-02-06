@@ -15,15 +15,35 @@ class PostForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
-  onSubmit() {
-    e.preventDefault();
+  componentWillReceiveProps(newProps) {
+    //   error checking
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
+    }
   }
-  onChange() {
+
+  onSubmit(e) {
+    e.preventDefault();
+    // Get user from Auth by destructing
+    const { user } = this.props.auth;
+    // Inserts this into post
+    const newPost = {
+      text: this.state.text,
+      name: user.name,
+      avatar: user.avatar
+    };
+
+    // Passes in new post
+    this.props.addPost(newPost);
+    this.setState({ text: "" });
+  }
+
+  onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
@@ -36,7 +56,7 @@ class PostForm extends Component {
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
-                  errors={errors.text}
+                  error={errors.text}
                 />
               </div>
               <button type="submit" className="btn btn-dark">
@@ -50,4 +70,19 @@ class PostForm extends Component {
   }
 }
 
-export default PostForm;
+PostForm.propTypes = {
+  addPost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+// To get the errors i needed to connect to redux
+
+export default connect(
+  mapStateToProps,
+  { addPost }
+)(PostForm);
