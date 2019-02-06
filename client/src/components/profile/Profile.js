@@ -17,6 +17,13 @@ class Profile extends Component {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profile.profile === null && this.props.profile.loading) {
+      // IF they are true redirect
+      this.props.history.push("/not-found");
+    }
+  }
   render() {
     //   Checks
     // Using destructuring to take out the profile from state
@@ -35,16 +42,21 @@ class Profile extends Component {
                 Back to Profiles
               </Link>
             </div>
-            <div classname="col-md-6" />
+            <div className="col-md-6" />
           </div>
           {/* Getting the data from this component */}
+          {/* passes in properties from profile to the sub components */}
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           <ProfileCreds
             education={profile.education}
             experience={profile.experience}
           />
-          <ProfileGithub />
+
+          {/* Check to see if they have a github */}
+          {/* {profile.githubusername ? (
+            <ProfileGithub username={profile.githubusername} />
+          ) : null} */}
         </div>
       );
     }
