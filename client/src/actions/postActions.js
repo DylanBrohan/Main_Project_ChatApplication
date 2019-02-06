@@ -4,7 +4,8 @@ import {
   GET_ERRORS,
   GET_POSTS,
   POST_LOADING,
-  DELETE_POST
+  DELETE_POST,
+  GET_POST
 } from "./types";
 
 // Add Like
@@ -90,6 +91,44 @@ export const deletePost = id => dispatch => {
     );
 };
 
+//Get Post
+export const getPost = id => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get(`/api/posts/${id}`)
+    .then(res =>
+      dispatch({
+        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_POST,
+        payload: null
+      })
+    );
+};
+
+//addComment
+export const addComment = (postId, commentData) => dispatch => {
+  axios
+    .post(`/api/posts/comment/${postId}`, commentData)
+    .then(res =>
+      dispatch({
+        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // Set Loading state
 export const setPostLoading = () => {
   return {

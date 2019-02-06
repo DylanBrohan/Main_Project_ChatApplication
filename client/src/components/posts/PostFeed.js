@@ -6,6 +6,7 @@ class PostFeed extends Component {
   render() {
     // Destructure take post out of props
     const { posts } = this.props;
+    // Mapping through them and then calling up PostItem Component
     return posts.map(post => <PostItem key={post._id} post={post} />);
   }
 }
