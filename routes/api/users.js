@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
+const { exec } = require("child_process");
+
 // Load Input Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -61,7 +63,6 @@ router.post("/register", (req, res) => {
     }
   });
 });
-
 // res.json serves a JSON request
 // Route GET api/users/login, login a user, returning as a token
 router.post("/login", (req, res) => {
@@ -121,5 +122,9 @@ router.get(
     });
   }
 );
+
+router.get("/recommendation", (req, res) => {
+  console.log("we got the command");
+});
 
 module.exports = router;

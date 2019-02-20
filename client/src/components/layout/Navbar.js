@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
+import axios from "axios";
+const { spawn } = require("child_process");
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -13,6 +15,7 @@ class Navbar extends Component {
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -28,6 +31,15 @@ class Navbar extends Component {
             Your Dashbaord
           </Link>
         </li>
+        {/* <li className="nav-item">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.getRecommendation.bind(this)}
+          >
+            Get Reviews
+          </button>
+        </li> */}
         <li className="nav-item">
           <a
             href=""
