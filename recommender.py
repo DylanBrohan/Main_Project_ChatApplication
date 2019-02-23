@@ -99,6 +99,6 @@ def topNRecommendations(activeUser,N):
     topRecommendationTitles = topRecommendationTitles[:3]
     return list(topRecommendationTitles.title)
     
-activeUser=5
+activeUser=300
 print(topNRecommendations(activeUser,10))
 

@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
-import axios from "axios";
-const { spawn } = require("child_process");
 
 class Navbar extends Component {
   onLogoutClick(e) {
