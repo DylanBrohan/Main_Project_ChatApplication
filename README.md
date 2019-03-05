@@ -16,15 +16,21 @@ _Client_
 - [Node](https://nodejs.org/en/) - Dependency
 - [Bootstrap](https://react-bootstrap.github.io/getting-started/introduction) - CSS framework
 - [Redux](https://redux.js.org/) - Redux
+
   _Database_
+
 - [MongoDB](https://redux.js.org/) - MongoDB(Mlab/Atlas)
+
   _Security & Communication_
-- [Passport](http://www.passportjs.org/) - Passport
-- [Express](https://expressjs.com/) - Express
+
+* [Passport](http://www.passportjs.org/) - Passport
+* [Express](https://expressjs.com/) - Express
+
   _Recommendation Engine_
-- [Python](https://python.com/) - Python
-- [Numpy, Scipy & PyMongo](https://python.com/) - Numpy, Scipy & PyMongo
-- [Pandas](https://pandas.com/) - Pandas
+
+* [Python](https://python.com/) - Python
+* [Numpy, Scipy & PyMongo](https://python.com/) - Numpy, Scipy & PyMongo
+* [Pandas](https://pandas.com/) - Pandas
 
 ## Authors
 
