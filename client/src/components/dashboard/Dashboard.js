@@ -85,7 +85,7 @@ class Dashboard extends Component {
     );
   }
 }
-
+// Required proptypes
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
@@ -93,11 +93,13 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
+// Maps state from redux store to props in this component
 const mapStateToProps = state => ({
   profile: state.profile,
   auth: state.auth
 });
 
+// Connection to Redux Store
 export default connect(
   mapStateToProps,
   { getCurrentProfile, deleteAccount }

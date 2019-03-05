@@ -1,5 +1,5 @@
 import React from "react";
-
+// Component that is called if page is not found
 export default () => {
   return (
     <div>

@@ -14,13 +14,13 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  // When the component mounts and is authenticated is true- redirect to dashboard
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
   }
-
+  // When there is a change in props state this will run
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -83,17 +83,20 @@ class Login extends Component {
     );
   }
 }
-
+// Prop types required
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
+
+// Mapping state to Props from store
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
+// Connecting to Redux store
 export default connect(
   mapStateToProps,
   { loginUser }

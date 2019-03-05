@@ -1,14 +1,14 @@
 import React, { Component } from "react";
+// Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+// Router
 import { withRouter } from "react-router-dom";
 import { createProfile } from "../../actions/profileActions";
 
 // Input Components
 import TextFieldGroup from "../common/textFieldGroup";
-
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 
@@ -38,12 +38,13 @@ class CreateProfile extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  // If there is a change in state -
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
+  // On submit set the state of the following fields
   onSubmit(e) {
     e.preventDefault();
     // Has All the profile fields
@@ -251,6 +252,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
+// Connects to Redux Store
 export default connect(
   mapStateToProps,
   { createProfile }

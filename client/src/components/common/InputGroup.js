@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-
+// Initial state in component
 const InputGroup = ({
   name,
   placeholder,
@@ -37,6 +37,7 @@ const InputGroup = ({
   );
 };
 
+// Required Prop types
 InputGroup.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,

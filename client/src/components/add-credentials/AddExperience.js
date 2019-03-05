@@ -157,18 +157,20 @@ class AddExperience extends Component {
     );
   }
 }
+// Proptypes that are required
 AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
-
+// Maps the state to the props in the component from the store
 const mapStateToProps = state => ({
   // Brings in state from reducer
   profile: state.profile,
   errors: state.errors
 });
 
+// connects to redux
 export default connect(
   mapStateToProps,
   { addExperience }

@@ -3,13 +3,14 @@ import { Link, withRouter } from "react-router-dom";
 // Field Components
 import TextFieldGroup from "../common/textFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-// Redux
+// Redux Connection
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { addEducation } from "../../actions/profileActions";
 
 class AddEducation extends Component {
   constructor(props) {
+    // Initial State
     super(props);
     this.state = {
       school: "",
@@ -22,12 +23,12 @@ class AddEducation extends Component {
       errors: {},
       disabled: false
     };
-
+    // Binding functions to state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
-
+  // When there is a change in State update the props
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -157,18 +158,20 @@ class AddEducation extends Component {
     );
   }
 }
+
+// Proptypes that are required in this Component
 AddEducation.propTypes = {
   addEducation: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
-
+// Maps state to props from the store
 const mapStateToProps = state => ({
-  // Brings in state from reducer
+  // Brings in state from Store
   profile: state.profile,
   errors: state.errors
 });
-
+// Connects to REDUX store
 export default connect(
   mapStateToProps,
   { addEducation }

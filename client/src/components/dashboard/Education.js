@@ -6,6 +6,7 @@ import { deleteEducation } from "../../actions/profileActions";
 import Moment from "react-moment";
 
 class Education extends Component {
+  // Delete by id when this is called
   onDeleteClick(id) {
     this.props.deleteEducation(id);
   }
@@ -50,10 +51,11 @@ class Education extends Component {
     );
   }
 }
+// Required
 Education.proptype = {
   deleteEducation: PropTypes.func.isRequired
 };
-
+// Connection to Redux store
 export default connect(
   null,
   { deleteEducation }
