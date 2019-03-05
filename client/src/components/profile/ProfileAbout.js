@@ -5,11 +5,13 @@ import axios from "axios";
 
 class ProfileAbout extends Component {
   constructor(props) {
+    // Initial state
     super(props);
     this.state = {
       recommenderData: []
     };
   }
+  // ---Get request to the Python Recommendation engine (Server)---
   componentDidMount() {
     axios
       .get("/rec")

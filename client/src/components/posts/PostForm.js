@@ -6,15 +6,16 @@ import { addPost } from "../../actions/postActions";
 class PostForm extends Component {
   constructor(props) {
     super(props);
-    // Setting state
+    // Setting  initial state
     this.state = {
       text: "",
       errors: {}
     };
-
+    // Binding to state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  // whEN there is a change in state update -
   componentWillReceiveProps(newProps) {
     //   error checking
     if (newProps.errors) {
@@ -69,19 +70,19 @@ class PostForm extends Component {
     );
   }
 }
-
+// Prop Types required in this component
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
+// Map state to props from Redux
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-// To get the errors i needed to connect to redux
-
+// Connection to Redux Storee
 export default connect(
   mapStateToProps,
   { addPost }

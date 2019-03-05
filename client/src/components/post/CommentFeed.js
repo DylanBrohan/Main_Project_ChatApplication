@@ -1,10 +1,8 @@
-// Feed takes care of mapping through the comments
-
-// Comment item takes care of displaying each comment
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+// Comment item takes care of displaying each comment
 import CommentItem from "./CommentItem";
-
+// CommentFeed takes care of mapping through the comments
 class CommentFeed extends Component {
   render() {
     const { comments, postId } = this.props;
@@ -14,7 +12,7 @@ class CommentFeed extends Component {
     ));
   }
 }
-
+// Required Props
 CommentFeed.propTypes = {
   comments: PropTypes.array.isRequired,
   postId: PropTypes.string.isRequired

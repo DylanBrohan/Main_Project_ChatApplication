@@ -76,7 +76,6 @@ router.get("/handle/:handle", (req, res) => {
 // GET API/profile/user/:user_id
 // Get profile by userId
 // if the user has no Profile. Error
-
 router.get("/user/:user_id", (req, res) => {
   const errors = {};
   Profile.findOne({ user: req.params.user_id })

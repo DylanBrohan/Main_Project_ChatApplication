@@ -5,7 +5,6 @@ class ProfileCreds extends Component {
   render() {
     //   Destructering from Profile component
     const { experience, education } = this.props;
-
     // Mapping through both experience & education Items
     const expItems = experience.map(exp => (
       <li key={exp._id} className="list-group-item">

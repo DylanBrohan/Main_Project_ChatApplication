@@ -54,11 +54,11 @@ Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
-
+// Mapping state to this components Props from Store
 const mapStateToProps = state => ({
   profile: state.profile
 });
-
+// Connection to Redux Store
 export default connect(
   mapStateToProps,
   { getProfiles }

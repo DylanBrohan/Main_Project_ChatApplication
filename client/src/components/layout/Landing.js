@@ -11,7 +11,7 @@ class Landing extends Component {
       position: toast.POSITION.TOP_CENTER
     });
   };
-
+  // When this component runs & is authenticated redirect ot dashboard
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -30,12 +30,6 @@ class Landing extends Component {
                 <p className="lead">
                   Create a developer profile/portfolio, share posts and get
                   Recommendations
-                  {/* <button
-                    className="btn btn-sm btn-info mr-2"
-                    onClick={this.notify}
-                  >
-                    Recommendations{" "}
-                  </button> */}
                   <ToastContainer /> on what Technolgies you should pursue.
                 </p>
                 <hr />
@@ -55,11 +49,14 @@ class Landing extends Component {
   }
 }
 
+// Proptypes required in this component
 Landing.propTypes = {
   auth: PropTypes.object.isRequired
 };
+// Map state to props from reduc store
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Connection to Redux store
 export default connect(mapStateToProps)(Landing);

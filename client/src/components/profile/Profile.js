@@ -27,10 +27,8 @@ class Profile extends Component {
   render() {
     //   Checks
     // Using destructuring to take out the profile from state
-
     const { profile, loading } = this.props.profile;
     let profileContent;
-
     if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
@@ -72,10 +70,12 @@ Profile.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
+// Mapping state to props from store
 const mapStateToProps = state => ({
   profile: state.profile
 });
 
+// Connection to Redux Store
 export default connect(
   mapStateToProps,
   { getProfileByHandle }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Profile sub sections links to each
 const ProfileActions = () => {
   return (
     <div className="btn-group mb-4" role="group">

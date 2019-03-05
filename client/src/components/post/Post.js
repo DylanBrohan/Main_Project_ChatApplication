@@ -15,9 +15,10 @@ class Post extends Component {
   render() {
     const { post, loading } = this.props.post;
     let postContent;
-
+    // IF there is no post activate Spinner Component
     if (post === null || loading || Object.keys(post).length === 0) {
       postContent = <Spinner />;
+      // Else display content
     } else {
       postContent = (
         <div>
@@ -49,10 +50,11 @@ Post.propTypes = {
   post: PropTypes.object.isRequired
 };
 
+// Maps state  from store to props
 const mapStateToProps = state => ({
   post: state.post
 });
-
+// Connection to Redux store
 export default connect(
   mapStateToProps,
   { getPost }

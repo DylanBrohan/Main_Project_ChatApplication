@@ -16,6 +16,7 @@ class CommentForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  // When there is a change in props -
   componentWillReceiveProps(newProps) {
     //   error checking
     if (newProps.errors) {
@@ -79,13 +80,13 @@ CommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired
 };
-
+// Map state from redux store to props in this component
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-// To get the errors i needed to connect to redux
 
+// Connects to Redux store  & Pulls Action types required
 export default connect(
   mapStateToProps,
   { addComment }
