@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
+// Child Process for connection to recommender
 const { exec } = require("child_process");
 
 // Load Input Validation
@@ -122,9 +123,5 @@ router.get(
     });
   }
 );
-
-router.get("/recommendation", (req, res) => {
-  console.log("we got the command");
-});
 
 module.exports = router;

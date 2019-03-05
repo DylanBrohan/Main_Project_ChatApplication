@@ -4,6 +4,8 @@ const isEmpty = require("./is-empty");
 module.exports = function validateLoginInput(data) {
   let errors = {};
 
+  // If it exists it will be the result
+  //   if email field doesnt exist, make it an empty string
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
 

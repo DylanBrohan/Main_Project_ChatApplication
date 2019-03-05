@@ -29,12 +29,13 @@ class Landing extends Component {
                 <h1 className="display-3 mb-4">Chat AI</h1>
                 <p className="lead">
                   Create a developer profile/portfolio, share posts and get
-                  <button
+                  Recommendations
+                  {/* <button
                     className="btn btn-sm btn-info mr-2"
                     onClick={this.notify}
                   >
                     Recommendations{" "}
-                  </button>
+                  </button> */}
                   <ToastContainer /> on what Technolgies you should pursue.
                 </p>
                 <hr />

@@ -1,7 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "../../validation/is-empty";
+import axios from "axios";
+
 class ProfileAbout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recommenderData: []
+    };
+  }
+  componentDidMount() {
+    axios
+      .get("/rec")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          recommenderData: res.data
+        });
+      })
+      // Else give back and error
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     //   Destructure from props
     const { profile } = this.props;
@@ -29,10 +52,19 @@ class ProfileAbout extends Component {
               )}
             </p>
             <hr />
-            <h3 className="text-center text-info">Skill Set</h3>
+            <h3 className="text-left text-info col-sm-4">Languages You Know</h3>
             <div className="row">
               <div className="d-flex flex-wrap justify-content-center align-items-center">
                 {skill}
+              </div>
+            </div>
+            {/* Place here RECOMMENDATION */}
+            <h3 className="text-left text-info col-sm-4">
+              Recommended For You
+            </h3>
+            <div className="row">
+              <div className="d-flex flex-wrap justify-content-center align-items-center">
+                {this.state.recommenderData}
               </div>
             </div>
           </div>

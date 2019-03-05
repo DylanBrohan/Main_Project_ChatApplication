@@ -1,21 +1,33 @@
+# Import Dependencies Needed 
 import numpy as np 
 import pandas as pd 
+import sys 
+# Needed for Mongo Client
+import pymongo
+from pymongo import MongoClient
 
-# The objective is to generate some movie recommendations for a user, given Languages they have already
-dataFile='ratings.csv'
-data=pd.read_csv(dataFile,sep=",")
+# Setting URI to be - 
+uri = 'mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai' 
 
+# Mongo connection to database collection
+MONGODB_URI = "mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai"
+client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+db = client.get_database("chatai")
+data = db.recommender
+
+# Creating the data into a dataframe
+data = pd.DataFrame(list(data.find()))
+
+# The objective is to generate some Language recommendations for a user, given Languages they have already rated 
 
 #Create the Matrix Table that will be used in creating similarties
-userItemRatingMatrix=pd.pivot_table(data, values='rating',
-                                    index=['userId'], columns=['itemId'])
-
+userItemRatingMatrix=pd.pivot_table(data, values='rating', index=['userId'], columns=['itemId'])
 # function to find the similarity between 2 users. 
 # use a correlation to do so 
 from scipy.spatial.distance import correlation 
 def similarity(user1,user2):
     user1=np.array(user1)-np.nanmean(user1) 
-    # we are first normalizing user1 by 
+    # normalizing user1 by 
     # the mean rating of user 1 for any Language.    
     #  np.nanmean() - returns the mean of an array after ignoring and NaN values 
     user2=np.array(user2)-np.nanmean(user2)
@@ -35,7 +47,7 @@ def similarity(user1,user2):
 # Using this similarity function, find the nearest neighbours of the active user
 def nearestNeighbourRatings(activeUser,K):
     # This function will find the K Nearest neighbours of the active user, then 
-    # use their ratings to predict the activeUsers ratings for other Language  
+    # use their ratings to predict the activeUsers ratings for other Languages 
     similarityMatrix=pd.DataFrame(index=userItemRatingMatrix.index,
                                   columns=['Similarity'])
     # Creates an empty matrix whose row index is userIds, and the value will be 
@@ -50,8 +62,8 @@ def nearestNeighbourRatings(activeUser,K):
     # Sort the similarity matrix in the descending order of similarity 
     nearestNeighbours=similarityMatrix[:K]
     # The above line will give us the K Nearest neighbours    
-    # We'll now take the nearest neighbours and use their ratings 
-    # to predict the active user's rating for every movie
+    # taking the nearest neighbours and use their ratings 
+    # to predict the active user's rating for every language
     neighbourItemRatings=userItemRatingMatrix.loc[nearestNeighbours.index]
     # the similarity matrix had an index which was the userId, By sorting 
     # and picking the top K rows, the nearestNeighbours dataframe now has 
@@ -81,7 +93,7 @@ def nearestNeighbourRatings(activeUser,K):
     return predictItemRating
 
 
-# Let's now use these predicted Ratings to find the top N Recommendations for the
+# using these predicted Ratings to find the top N Recommendations for the
 # active user 
 def topNRecommendations(activeUser,N):
     predictItemRating=nearestNeighbourRatings(activeUser,5)
@@ -100,5 +112,6 @@ def topNRecommendations(activeUser,N):
     return list(topRecommendationTitles.title)
     
 activeUser=300
+
 print(topNRecommendations(activeUser,10))
 

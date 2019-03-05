@@ -34,6 +34,7 @@ class ProfileItem extends Component {
           </div>
           <div className="col-md-4 d-none d-md-block">
             <h4>Skill Set</h4>
+
             <ul className="list-group">
               {/* Slices the array */}
               {/* & Maps them to index-skill */}

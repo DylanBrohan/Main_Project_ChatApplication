@@ -1,3 +1,5 @@
+// Setting up validation function --isEmpty--
+// isEmpty is = to a value of - Undefined, null, an empty string || object
 const isEmpty = value =>
   value === undefined ||
   value === null ||

@@ -4,6 +4,8 @@ const isEmpty = require("./is-empty");
 module.exports = function validateExperienceInput(data) {
   let errors = {};
 
+  // If it exists it will be the result
+  //   if title field doesnt exist, make it an empty string
   data.title = !isEmpty(data.title) ? data.title : "";
   data.company = !isEmpty(data.company) ? data.company : "";
   data.from = !isEmpty(data.from) ? data.from : "";
