@@ -50,7 +50,8 @@ app.get("/rec", (req, res) => {
 
 app.get("/rec2/:id", (req, res) => {
   let spawn = require("child_process").spawn;
-  let process = spawn("python", ["recommender.py"]);
+  let process = spawn("python", ["recommender.py", req.params.id]);
+  console.log(req.params.id);
   process.stdout.on("data", function(data) {
     res.send(data.toString());
   });

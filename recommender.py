@@ -6,20 +6,23 @@ import sys
 import pymongo
 from pymongo import MongoClient
 
+# print str(sys.argv[1])
+
 # Setting URI to be - 
 uri = 'mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai' 
 
 # Mongo connection to database collection
 MONGODB_URI = "mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai"
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+# Database
 db = client.get_database("chatai")
+# data object correlates to the collection in the database
 data = db.recommender
 
 # Creating the data into a dataframe
 data = pd.DataFrame(list(data.find()))
-
+  
 # The objective is to generate some Language recommendations for a user, given Languages they have already rated 
-
 #Create the Matrix Table that will be used in creating similarties
 userItemRatingMatrix=pd.pivot_table(data, values='rating', index=['userId'], columns=['itemId'])
 # function to find the similarity between 2 users. 
@@ -111,7 +114,8 @@ def topNRecommendations(activeUser,N):
     topRecommendationTitles = topRecommendationTitles[:3]
     return list(topRecommendationTitles.title)
     
-activeUser=300
+activeUser=sys.argv[1]
+# activeUser=300
 
 print(topNRecommendations(activeUser,10))
 
