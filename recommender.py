@@ -114,8 +114,26 @@ def topNRecommendations(activeUser,N):
     topRecommendationTitles = topRecommendationTitles[:3]
     return list(topRecommendationTitles.title)
     
-activeUser=sys.argv[1]
-# activeUser=300
+# activeUser= db.scout.findOne()
+
+
+# activeUser=1
+
+# userId = db.recommender.userId
+# activeUser = db.recommender.find_one(
+#   sort=[( '_id', pymongo.DESCENDING 
+#  )]
+# )
+
+# userId = db.recommender.userId
+# userId = {userId:userId}
+# activeUser = db.recommender.find(userId, pymongo.DESCENDING)  
+
+# userId = frozenset(userId.items())
+# activeUser = db.recommender.find_one().sort([(userId, -1)]).limit(1)
+
+activeUser = db.recommender.find_one().sort([('userId', -1)]).limit(1)
+
 
 print(topNRecommendations(activeUser,10))
 

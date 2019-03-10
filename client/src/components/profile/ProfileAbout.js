@@ -13,6 +13,7 @@ class ProfileAbout extends Component {
       userId: "",
       itemId: "",
       title: "",
+      rating: "",
       recommenderData: []
     };
     this.onChange = this.onChange.bind(this);
@@ -22,13 +23,24 @@ class ProfileAbout extends Component {
   onSubmit(e) {
     e.preventDefault();
     // Has All the profile fields
-    const profileData = {
-      userId: this.state.userId,
-      itemId: this.state.itemId,
-      title: this.state.title
-    };
-    // Redux actions are always in the Props
-    // this.props.createProfile(profileData, this.props.history);
+    // const profileData = {
+    //   userId: this.state.userId,
+    //   itemId: this.state.itemId,
+    //   title: this.state.title,
+    //   rating: this.state.rating
+    // };
+    axios
+      .post("/recommender")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          recommender: res.data
+        });
+      })
+      // Else give back and error
+      .catch(err => {
+        console.log(err);
+      });
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -36,18 +48,18 @@ class ProfileAbout extends Component {
 
   // ---Get request to the Python Recommendation engine (Server)---
   componentDidMount() {
-    axios
-      .get("/rec")
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          recommenderData: res.data
-        });
-      })
-      // Else give back and error
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .get("/rec")
+    //   .then(res => {
+    //     console.log(res.data);
+    //     this.setState({
+    //       recommenderData: res.data
+    //     });
+    //   })
+    //   // Else give back and error
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
   render() {
@@ -65,109 +77,109 @@ class ProfileAbout extends Component {
 
     const options = [
       { label: "* Select Your Favourite Language", value: 0 },
-      { label: "php", value: "php" },
-      { label: "css", value: "css" },
-      { label: "html", value: "html" },
-      { label: "java", value: "java" },
-      { label: "javascript", value: "javascript" },
-      { label: "python", value: "python" },
+      { label: "1: php", value: "php" },
+      { label: "2: css", value: "css" },
+      { label: "3: html", value: "html" },
+      { label: "4: java", value: "java" },
+      { label: "5: javascript", value: "javascript" },
+      { label: "6: python", value: "python" },
       {
-        label: "swift",
+        label: "7: swift",
         value: "swift"
       },
       {
-        label: "basic",
+        label: "8: basic",
         value: "basic"
       },
       {
-        label: "fortran",
+        label: "9: fortran",
         value: "fortran"
       },
       {
-        label: "apa",
+        label: "10: apa",
         value: "apa"
       },
       {
-        label: "perl",
+        label: "11: perl",
         value: "perl"
       },
       {
-        label: "postScript",
+        label: "12: postScript",
         value: "postScript"
       },
       {
-        label: "rex",
+        label: "13: rex",
         value: "rex"
       },
       {
-        label: "ruby",
+        label: "14: ruby",
         value: "ruby"
       },
       {
-        label: "curry",
+        label: "15: curry",
         value: "curry"
       },
       {
-        label: "c",
+        label: "16: c",
         value: "c"
       },
       {
-        label: "c++",
+        label: "17: c++",
         value: "c++"
       },
       {
-        label: "c#",
+        label: "18: c#",
         value: "c#"
       },
       {
-        label: "cobol",
+        label: "19: cobol",
         value: "cobol"
       },
       {
-        label: "D",
+        label: "20: D",
         value: "D"
       },
       {
-        label: "AppleScript",
+        label: "21: AppleScript",
         value: "AppleScript"
       },
       {
-        label: "curl",
+        label: "22: curl",
         value: "curl"
       },
       {
-        label: "xml",
+        label: "23: xml",
         value: "xml"
       },
       {
-        label: "lava",
+        label: "24: lava",
         value: "lava"
       },
       {
-        label: "IOS",
+        label: "25: IOS",
         value: "IOS"
       },
       {
-        label: "Rails",
+        label: "26: Rails",
         value: "Rails"
       },
       {
-        label: "SQL",
+        label: "27: SQL",
         value: "SQL"
       },
       {
-        label: "Excel",
+        label: "28: Excel",
         value: "Excel"
       },
       {
-        label: "JupyterNoteBook",
+        label: "29: JupyterNoteBook",
         value: "JupyterNoteBook"
       },
       {
-        label: "Rstudio",
+        label: "30: Rstudio",
         value: "Rstudio"
       },
-      { label: "AndroidStudio", value: "AndroidStudio" }
+      { label: "31: AndroidStudio", value: "AndroidStudio" }
     ];
     return (
       //   Profile About
@@ -199,28 +211,34 @@ class ProfileAbout extends Component {
               placeholder="User ID"
               name="userId"
               info="Between 1 - 400"
-            />{" "}
-            <TextFieldGroup
-              className="col-sm-4"
-              input="form-control-md"
-              placeholder="Item ID"
-              name="itemId"
-              info="1 - 31"
+              value={this.state.userId}
+              onChange={this.onChange}
             />{" "}
             <SelectListGroup
               placeholder="* Favourite Language"
-              name="status"
+              name="title"
               value={this.state.title}
               onChange={this.onChange}
               options={options}
-              info="Which is your Favourite"
+              info="Which is your Favourite Languages?"
             />
             <TextFieldGroup
               className="col-sm-4"
               input="form-control-md"
+              placeholder="Language Tag"
+              name="itemId"
+              info="*1 - 31, eg( 1: PHP, Tag beside Language Name)*"
+              value={this.state.itemId}
+              onChange={this.onChange}
+            />{" "}
+            <TextFieldGroup
+              className="col-sm-4"
+              input="form-control-md"
               placeholder="Rating"
-              name="skills"
-              info="Rate your favourite Language"
+              name="rating"
+              info="Rate your favourite Language 1-5"
+              value={this.state.rating}
+              onChange={this.onChange}
             />{" "}
             <input
               type="submit"
@@ -229,13 +247,15 @@ class ProfileAbout extends Component {
             />
             <div className="row">
               <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {this.state.recommenderData}
+                {/* ID pulling */}
+                {this.state.recommender}
               </div>
             </div>
             <hr />
             <h3 className="text-left text-info col-sm-4">
               Recommended For You
             </h3>
+            {this.state.recommenderData}
           </div>
         </div>
       </div>

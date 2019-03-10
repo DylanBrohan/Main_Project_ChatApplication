@@ -9,6 +9,8 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 
+// Load Recommender Model
+const User = require("./models/Recommender");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,11 +50,15 @@ app.get("/rec", (req, res) => {
   });
 });
 
-app.get("/rec2/:id", (req, res) => {
-  let spawn = require("child_process").spawn;
-  let process = spawn("python", ["recommender.py", req.params.id]);
-  console.log(req.params.id);
-  process.stdout.on("data", function(data) {
-    res.send(data.toString());
-  });
+app.post("/recommender", (req, res) => {
+  let recommender = new Recommender();
+  const { userId, itemId, rating, title } = req.body;
 });
+// app.get("/rec2/:id", (req, res) => {
+//   let spawn = require("child_process").spawn;
+//   let process = spawn("python", ["recommender.py", req.params.id]);
+//   console.log(req.params.id);
+//   process.stdout.on("data", function(data) {
+//     res.send(data.toString());
+//   });
+// });
