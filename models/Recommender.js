@@ -4,7 +4,6 @@ const autoIncrement = require("mongoose-auto-increment");
 
 // autoIncrement.initialize(connection);
 
-// User schema
 const RecommenderSchema = new Schema({
   // Defining my fields
   userId: {

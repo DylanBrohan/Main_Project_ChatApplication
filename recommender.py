@@ -116,6 +116,17 @@ def topNRecommendations(activeUser,N):
     
 # activeUser= db.scout.findOne()
 
+# activeUser=(sys.argv[1])
+
+# activeUser = db.recommender.find()({userId:-1}).sort([("userId", -1)]);
+
+# db.recommender.createIndex( { recommender: -1 } )
+
+# activeUser = db.recommender.create_index([("userId", pymongo.DESCENDING)])
+
+# db.recommender.find().sort(u'userId', -1)
+
+
 
 # activeUser=1
 
@@ -126,13 +137,20 @@ def topNRecommendations(activeUser,N):
 # )
 
 # userId = db.recommender.userId
-# userId = {userId:userId}
+userId = db.recommender.userId
+activeUser = db.recommender.find().sort({userId:1});
+
+# userId = db.recommender.userId
+
 # activeUser = db.recommender.find(userId, pymongo.DESCENDING)  
 
-# userId = frozenset(userId.items())
-# activeUser = db.recommender.find_one().sort([(userId, -1)]).limit(1)
+# userId = db.recommender.userId
 
-activeUser = db.recommender.find_one().sort([('userId', -1)]).limit(1)
+
+# userId = db.recommender.userId
+# activeUser = db.recommender.find_one([('userId', -1)])
+
+# activeUser = db.recommender.find_one("userId", -1).limit(1)
 
 
 print(topNRecommendations(activeUser,10))

@@ -23,20 +23,22 @@ class ProfileAbout extends Component {
   onSubmit(e) {
     e.preventDefault();
     // Has All the profile fields
-    // const profileData = {
-    //   userId: this.state.userId,
-    //   itemId: this.state.itemId,
-    //   title: this.state.title,
-    //   rating: this.state.rating
-    // };
+    const profileData = {
+      userId: this.state.userId,
+      itemId: this.state.itemId,
+      title: this.state.title,
+      rating: this.state.rating
+    };
     axios
-      .post("/recommender")
+      .post("/api/recommender/recommender", profileData)
+
       .then(res => {
         console.log(res.data);
         this.setState({
-          recommender: res.data
+          recommenderData: res.data
         });
       })
+
       // Else give back and error
       .catch(err => {
         console.log(err);
@@ -201,61 +203,63 @@ class ProfileAbout extends Component {
                 {skill}
               </div>
             </div>
-            {/* Place here RECOMMENDATION */}
             <h3 className="text-left text-info col-sm-6">
               Rate Your Favourite Languages
             </h3>
-            <TextFieldGroup
-              className="col-sm-4"
-              input="form-control-md"
-              placeholder="User ID"
-              name="userId"
-              info="Between 1 - 400"
-              value={this.state.userId}
-              onChange={this.onChange}
-            />{" "}
-            <SelectListGroup
-              placeholder="* Favourite Language"
-              name="title"
-              value={this.state.title}
-              onChange={this.onChange}
-              options={options}
-              info="Which is your Favourite Languages?"
-            />
-            <TextFieldGroup
-              className="col-sm-4"
-              input="form-control-md"
-              placeholder="Language Tag"
-              name="itemId"
-              info="*1 - 31, eg( 1: PHP, Tag beside Language Name)*"
-              value={this.state.itemId}
-              onChange={this.onChange}
-            />{" "}
-            <TextFieldGroup
-              className="col-sm-4"
-              input="form-control-md"
-              placeholder="Rating"
-              name="rating"
-              info="Rate your favourite Language 1-5"
-              value={this.state.rating}
-              onChange={this.onChange}
-            />{" "}
-            <input
-              type="submit"
-              value="Submit"
-              className="btn btn-info btn-block mt-4"
-            />
-            <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
+            <div>
+              <form onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  className="col-sm-4"
+                  input="form-control-md"
+                  placeholder="User ID"
+                  name="userId"
+                  info="Between 1 - 400"
+                  value={this.state.userId}
+                  onChange={this.onChange}
+                />{" "}
+                <SelectListGroup
+                  placeholder="* Favourite Language"
+                  name="title"
+                  value={this.state.title}
+                  onChange={this.onChange}
+                  options={options}
+                  info="Which is your Favourite Languages?"
+                />
+                <TextFieldGroup
+                  className="col-sm-4"
+                  input="form-control-md"
+                  placeholder="Language Tag"
+                  name="itemId"
+                  info="*1 - 31, eg( 1: PHP, Tag beside Language Name)*"
+                  value={this.state.itemId}
+                  onChange={this.onChange}
+                />{" "}
+                <TextFieldGroup
+                  className="col-sm-4"
+                  input="form-control-md"
+                  placeholder="Rating"
+                  name="rating"
+                  info="Rate your favourite Language 1-5"
+                  value={this.state.rating}
+                  onChange={this.onChange}
+                />{" "}
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-info btn-block mt-4"
+                />
+                <div className="row">
+                  <div className="d-flex flex-wrap justify-content-center align-items-center" />
+                </div>
+                <hr />
+                <h3 className="text-left text-info col-sm-4">
+                  Recommended For You
+                </h3>{" "}
                 {/* ID pulling */}
+                {this.state.recommenderData}
                 {this.state.recommender}
-              </div>
+              </form>
             </div>
-            <hr />
-            <h3 className="text-left text-info col-sm-4">
-              Recommended For You
-            </h3>
-            {this.state.recommenderData}
           </div>
         </div>
       </div>

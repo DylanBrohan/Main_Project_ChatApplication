@@ -8,9 +8,11 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
+const recommender = require("./routes/api/recommender");
 
 // Load Recommender Model
-const User = require("./models/Recommender");
+const Recommender = require("./models/Recommender");
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,6 +37,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
+app.use("/api/recommender", recommender);
 
 const port = process.env.PORT || 5000; //listen to port 5000 localhost
 
@@ -51,9 +54,27 @@ app.get("/rec", (req, res) => {
 });
 
 app.post("/recommender", (req, res) => {
-  let recommender = new Recommender();
-  const { userId, itemId, rating, title } = req.body;
+  const newRecommender = new Recommender({
+    userId: req.body.userId,
+    itemId: req.body.itemId,
+    rating: req.body.rating,
+    title: req.body.title
+  });
+  res.send(req.body);
+  console.log(body);
 });
+
+// app.get("/recommender", (req, res) => {
+//   res.send(req.body);
+//   const newRecommender = new Recommender({
+//     userId: req.body.userId,
+//     itemId: req.body.itemId,
+//     rating: req.body.rating,
+//     title: req.body.title
+//   });
+//   console.log(body);
+// });
+
 // app.get("/rec2/:id", (req, res) => {
 //   let spawn = require("child_process").spawn;
 //   let process = spawn("python", ["recommender.py", req.params.id]);
