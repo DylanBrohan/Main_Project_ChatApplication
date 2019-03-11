@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 class Landing extends Component {
   notify = () => {
     toast.info("Do you like 'Python'? you will also like: !", {
-      position: toast.POSITION.TOP_CENTER
+      position: toast.POSITION.TOP_RIGHT
     });
   };
   // When this component runs & is authenticated redirect ot dashboard

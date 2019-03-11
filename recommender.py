@@ -6,8 +6,6 @@ import sys
 import pymongo
 from pymongo import MongoClient
 
-# print str(sys.argv[1])
-
 # Setting URI to be - 
 uri = 'mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai' 
 
@@ -22,7 +20,6 @@ data = db.recommender
 # Creating the data into a dataframe
 data = pd.DataFrame(list(data.find()))
   
-# The objective is to generate some Language recommendations for a user, given Languages they have already rated 
 #Create the Matrix Table that will be used in creating similarties
 userItemRatingMatrix=pd.pivot_table(data, values='rating', index=['userId'], columns=['itemId'])
 # function to find the similarity between 2 users. 
@@ -107,51 +104,22 @@ def topNRecommendations(activeUser,N):
     predictItemRating=predictItemRating.drop(languagesAlreadyRated)
     topRecommendations=pd.DataFrame.sort_values(predictItemRating,
                                                 ['Rating'],ascending=[0])[:N]
-    
-    # This will give us the list of itemIds which are the top recommendations 
-    # Let's find the corresponding movie titles 
+                                                        # ascending
+    # This will give the list of itemIds which are the top recommendations 
+    # finds the corresponding  Languages
     topRecommendationTitles=(data.loc[data.itemId.isin(topRecommendations.index)])
     topRecommendationTitles = topRecommendationTitles[:3]
     return list(topRecommendationTitles.title)
     
-# activeUser= db.scout.findOne()
-
-# activeUser=(sys.argv[1])
-
-# activeUser = db.recommender.find()({userId:-1}).sort([("userId", -1)]);
-
-# db.recommender.createIndex( { recommender: -1 } )
-
-# activeUser = db.recommender.create_index([("userId", pymongo.DESCENDING)])
-
-# db.recommender.find().sort(u'userId', -1)
 
 
+# ---Printing top 3 recommendations---
 
-# activeUser=1
+# Finding out the last user in the database by there Id
 
-# userId = db.recommender.userId
-# activeUser = db.recommender.find_one(
-#   sort=[( '_id', pymongo.DESCENDING 
-#  )]
-# )
-
-# userId = db.recommender.userId
-userId = db.recommender.userId
-activeUser = db.recommender.find().sort({userId:1});
-
-# userId = db.recommender.userId
-
-# activeUser = db.recommender.find(userId, pymongo.DESCENDING)  
-
-# userId = db.recommender.userId
-
-
-# userId = db.recommender.userId
-# activeUser = db.recommender.find_one([('userId', -1)])
-
-# activeUser = db.recommender.find_one("userId", -1).limit(1)
-
+cursor = db.recommender.find().sort([('_id', -1)]).limit(1)
+for doc in cursor:
+    activeUser = doc['userId']
+# print(activeUser)
 
 print(topNRecommendations(activeUser,10))
-

@@ -4,10 +4,18 @@ import isEmpty from "../../validation/is-empty";
 import axios from "axios";
 import TextFieldGroup from "../common/textFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
-
+// Notify Components
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class ProfileAbout extends Component {
+  notify = () => {
+    toast.info("Do you like 'Python'? you will also like: !", {
+      position: toast.POSITION.TOP_RIGHT
+    });
+  };
+
   constructor(props) {
-    // Initial state
+    // Initial states
     super(props);
     this.state = {
       userId: "",
@@ -16,6 +24,7 @@ class ProfileAbout extends Component {
       rating: "",
       recommenderData: []
     };
+    // Binding states
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -33,6 +42,18 @@ class ProfileAbout extends Component {
       .post("/api/recommender/recommender", profileData)
 
       .then(res => {
+        // axios
+        //   .get("/rec")
+        //   .then(res => {
+        //     console.log(res.data);
+        //     this.setState({
+        //       recommenderData: res.data
+        //     });
+        //   })
+        //   // Else give back and error
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
         console.log(res.data);
         this.setState({
           recommenderData: res.data
@@ -49,20 +70,7 @@ class ProfileAbout extends Component {
   }
 
   // ---Get request to the Python Recommendation engine (Server)---
-  componentDidMount() {
-    // axios
-    //   .get("/rec")
-    //   .then(res => {
-    //     console.log(res.data);
-    //     this.setState({
-    //       recommenderData: res.data
-    //     });
-    //   })
-    //   // Else give back and error
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  }
+  componentDidMount() {}
 
   render() {
     //   Destructure from props
@@ -247,6 +255,17 @@ class ProfileAbout extends Component {
                   type="submit"
                   value="Submit"
                   className="btn btn-info btn-block mt-4"
+                />
+                <ToastContainer
+                  position="top-right"
+                  autoClose={8000}
+                  hideProgressBar={false}
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnVisibilityChange={false}
+                  draggable
+                  pauseOnHover
                 />
                 <div className="row">
                   <div className="d-flex flex-wrap justify-content-center align-items-center" />
