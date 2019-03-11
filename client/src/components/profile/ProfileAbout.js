@@ -9,8 +9,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 class ProfileAbout extends Component {
   notify = () => {
-    toast.info("Do you like 'Python'? you will also like: !", {
-      position: toast.POSITION.TOP_RIGHT
+    toast.info("Calculating Recommendation.... Please Wait a Moment....", {
+      position: toast.POSITION.TOP_RIGHT,
+      position: "top-right",
+      autoClose: 100000,
+      hideProgressBar: false,
+      rtl: false,
+      pauseOnVisibilityChange: false
     });
   };
 
@@ -22,7 +27,8 @@ class ProfileAbout extends Component {
       itemId: "",
       title: "",
       rating: "",
-      recommenderData: []
+      recommenderData: [],
+      recommenderOutput: []
     };
     // Binding states
     this.onChange = this.onChange.bind(this);
@@ -40,24 +46,23 @@ class ProfileAbout extends Component {
     };
     axios
       .post("/api/recommender/recommender", profileData)
-
       .then(res => {
-        // axios
-        //   .get("/rec")
-        //   .then(res => {
-        //     console.log(res.data);
-        //     this.setState({
-        //       recommenderData: res.data
-        //     });
-        //   })
-        //   // Else give back and error
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
-        console.log(res.data);
-        this.setState({
-          recommenderData: res.data
-        });
+        axios
+          .get("/rec")
+          .then(res => {
+            console.log(res.data);
+            this.setState({
+              recommenderOutput: res.data
+            });
+          })
+          // Else give back and error
+          .catch(err => {
+            console.log(err);
+          });
+        // console.log(res.data);
+        // this.setState({
+        //   recommenderData: res.data
+        // });
       })
 
       // Else give back and error
@@ -191,6 +196,10 @@ class ProfileAbout extends Component {
       },
       { label: "31: AndroidStudio", value: "AndroidStudio" }
     ];
+
+    const objectValue = this.state.recommenderData;
+    const arrayObject = Object.values(objectValue);
+
     return (
       //   Profile About
       <div className="row">
@@ -255,10 +264,11 @@ class ProfileAbout extends Component {
                   type="submit"
                   value="Submit"
                   className="btn btn-info btn-block mt-4"
+                  onClick={this.notify}
                 />
                 <ToastContainer
                   position="top-right"
-                  autoClose={8000}
+                  autoClose={10000}
                   hideProgressBar={false}
                   newestOnTop
                   closeOnClick
@@ -275,8 +285,8 @@ class ProfileAbout extends Component {
                   Recommended For You
                 </h3>{" "}
                 {/* ID pulling */}
-                {this.state.recommenderData}
-                {this.state.recommender}
+                {arrayObject}
+                {this.state.recommenderOutput}
               </form>
             </div>
           </div>
