@@ -73,7 +73,7 @@ app.post("/recommender", (req, res) => {
     title: req.body.title
   });
   res.send(req.body);
-  console.log(body);
+  // console.log(body);
 });
 
 // app.get("/recommender", (req, res) => {
