@@ -59,12 +59,12 @@ class ProfileAbout extends Component {
           })
           // Else give back and error
           .catch(err => {
-            console.log(err);
+            // console.log(err);
           });
       })
       // Else give back and error
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   }
   onChange(e) {
