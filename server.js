@@ -12,7 +12,8 @@ const recommender = require("./routes/api/recommender");
 
 // Load Recommender Model
 const Recommender = require("./models/Recommender");
-
+// Production
+const path = require("path");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,6 +39,17 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 app.use("/api/recommender", recommender);
+
+//Server Static assets for production
+// If in production
+if (process.env.NODE_ENV === "production") {
+  // Set Static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000; //listen to port 5000 localhost
 
