@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const autoIncrement = require("mongoose-auto-increment");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 // autoIncrement.initialize(connection);
 
@@ -10,6 +10,8 @@ const RecommenderSchema = new Schema(
     // Defining my fields
     userId: {
       type: Number,
+      // inc_field: true,
+      // disable_hooks: true
       required: true
     },
     itemId: {
@@ -32,5 +34,11 @@ const RecommenderSchema = new Schema(
   },
   { collection: "recommender" }
 );
+
+// RecommenderSchema.plugin(AutoIncrement, {
+//   inc_field: "userId",
+//   disable_hooks: true
+// });
+
 // model created & Exported
 module.exports = Recommender = mongoose.model("recommender", RecommenderSchema);
