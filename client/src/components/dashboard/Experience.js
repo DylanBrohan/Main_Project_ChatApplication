@@ -50,6 +50,8 @@ class Experience extends Component {
     );
   }
 }
+
+// Type Checking
 Experience.proptype = {
   deleteExperience: PropTypes.func.isRequired
 };

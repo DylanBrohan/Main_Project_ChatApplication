@@ -11,6 +11,7 @@ import store from "./store";
 import { setCurrentUser } from "./actions/authActions";
 import { logoutUser } from "./actions/authActions";
 import { clearCurrentProfile } from "./actions/profileActions";
+
 // Layout Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
@@ -20,6 +21,7 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import AddExperience from "./components/add-credentials/AddExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
+
 // Profile Components
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
@@ -63,6 +65,7 @@ class App extends Component {
   render() {
     return (
       // Takes in Store
+      // All Routes(Public&Private) for applcation
       <Provider store={store}>
         <Router>
           <div className="App">

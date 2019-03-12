@@ -104,7 +104,6 @@ def topNRecommendations(activeUser,N):
     predictItemRating=predictItemRating.drop(languagesAlreadyRated)
     topRecommendations=pd.DataFrame.sort_values(predictItemRating,
                                                 ['Rating'],ascending=[0])[:N]
-                                                        # ascending
     # This will give the list of itemIds which are the top recommendations 
     # finds the corresponding  Languages
     topRecommendationTitles=(data.loc[data.itemId.isin(topRecommendations.index)])
@@ -116,7 +115,6 @@ def topNRecommendations(activeUser,N):
 # ---Printing top 3 recommendations---
 
 # Finding out the last user in the database by there Id
-
 cursor = db.recommender.find().sort([('_id', -1)]).limit(1)
 for doc in cursor:
     activeUser = doc['userId']

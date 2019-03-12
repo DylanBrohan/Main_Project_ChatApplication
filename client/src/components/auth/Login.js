@@ -36,7 +36,7 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
+    // grabbing state from props
     const userData = {
       email: this.state.email,
       password: this.state.password

@@ -211,7 +211,7 @@ class CreateProfile extends Component {
               </Link>
               <h1 className="display-4 text-center">Edit Profile</h1>
               <p className="lead text-center">
-                Add Information to make your profile
+                Add Information to Edit your profile
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
@@ -316,7 +316,7 @@ CreateProfile.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-// Maps the state to the Field
+// Maps the state from the store to the to the props of this component
 const mapStateToProps = state => ({
   // current profile will get mapped to props
   createProfile: PropTypes.func.isRequired,
@@ -326,6 +326,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
+// Connects to redux Store
 export default connect(
   mapStateToProps,
   { createProfile, getCurrentProfile }

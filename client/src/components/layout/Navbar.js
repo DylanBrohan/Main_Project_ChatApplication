@@ -16,7 +16,7 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-
+    // Auth Links setup here
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -29,15 +29,6 @@ class Navbar extends Component {
             Your Dashbaord
           </Link>
         </li>
-        {/* <li className="nav-item">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={this.getRecommendation.bind(this)}
-          >
-            Get Reviews
-          </button>
-        </li> */}
         <li className="nav-item">
           <a
             href=""
@@ -56,7 +47,7 @@ class Navbar extends Component {
         </li>
       </ul>
     );
-
+    // Guest Links set to these Routes
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -96,6 +87,7 @@ class Navbar extends Component {
                 </Link>
               </li>
             </ul>
+            {/* IF the user is authenticate = AuthLinks else use Guest */}
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
@@ -108,11 +100,12 @@ Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
-
+// map store state to props
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Pull state from store
 export default connect(
   mapStateToProps,
   { logoutUser, clearCurrentProfile }

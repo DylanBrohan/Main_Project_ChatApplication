@@ -1,4 +1,5 @@
 import axios from "axios";
+// Types of instructions defined
 import {
   ADD_POST,
   GET_ERRORS,
@@ -12,6 +13,7 @@ import {
 // Add Like
 export const addLike = id => dispatch => {
   axios
+    // Route to post like -
     .post(`/api/posts/like/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
@@ -22,7 +24,7 @@ export const addLike = id => dispatch => {
     );
 };
 
-// Remove Like
+// Remove Like Route
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
@@ -42,7 +44,7 @@ export const addPost = postData => dispatch => {
     .post("/api/posts", postData)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        // If everything goes ok - Dispatch ADD_POST to - Reducer
         type: ADD_POST,
         payload: res.data
       })
@@ -62,7 +64,7 @@ export const getPosts = () => dispatch => {
     .get("/api/posts")
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        // If everything goes ok - Dispatch ADD_POST to - Reducer
         type: GET_POSTS,
         payload: res.data
       })
@@ -80,7 +82,7 @@ export const deletePost = id => dispatch => {
     .delete(`/api/posts/${id}`)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        // If everything goes ok - Dispatch ADD_POST to - Reducer
         type: DELETE_POST,
         payload: id
       })
@@ -100,7 +102,7 @@ export const getPost = id => dispatch => {
     .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        // If everything goes ok - Dispatch ADD_POST to - Reducer
         type: GET_POST,
         payload: res.data
       })
@@ -120,7 +122,7 @@ export const addComment = (postId, commentData) => dispatch => {
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST from - Reducer
+        // If everything goes ok - Dispatch ADD_POST to - Reducer
         type: GET_POST,
         payload: res.data
       })
@@ -136,10 +138,11 @@ export const addComment = (postId, commentData) => dispatch => {
 // Delete Comment
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
+    // Route to backend Server by postId
     .delete(`/api/posts/comment/${postId}/${commentId}`)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch GET_POST from - Reducer
+        // If everything goes ok - Dispatch GET_POST to - Reducer
         type: GET_POST,
         payload: res.data
       })

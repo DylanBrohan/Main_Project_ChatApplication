@@ -12,12 +12,13 @@ import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
 
 class Profile extends Component {
+  // When the Component Runs ->
   componentDidMount() {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
   }
-
+  // When theres a change in state this will run-->
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
       // IF they are true redirect
@@ -53,18 +54,22 @@ class Profile extends Component {
         </div>
       );
     }
-
     return (
       <div className="profile">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">{profileContent}</div>
+            <div className="col-md-12">
+              {/* Displays Profile Content */}
+              {profileContent}
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
+
+// Type Checking
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired

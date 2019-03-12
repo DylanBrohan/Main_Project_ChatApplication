@@ -44,8 +44,10 @@ class ProfileAbout extends Component {
       title: this.state.title,
       rating: this.state.rating
     };
+    // Inserts Data in recommendation Engine Collection
     axios
       .post("/api/recommender/recommender", profileData)
+      // Get Request which runs the child_process request - running the engine
       .then(res => {
         axios
           .get("/rec")
@@ -59,12 +61,7 @@ class ProfileAbout extends Component {
           .catch(err => {
             console.log(err);
           });
-        // console.log(res.data);
-        // this.setState({
-        //   recommenderData: res.data
-        // });
       })
-
       // Else give back and error
       .catch(err => {
         console.log(err);
@@ -74,22 +71,20 @@ class ProfileAbout extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // ---Get request to the Python Recommendation engine (Server)---
   componentDidMount() {}
-
   render() {
     //   Destructure from props
     const { profile } = this.props;
     // Get First Name
     const firstName = profile.user.name.trim().split(" ")[0];
 
-    // GetSkill list
+    // Get --Skill list--
     const skill = profile.skills.map((skill, index) => (
       <div key={index} className="p-3">
         <i className="fa fa-check" /> {skill}
       </div>
     ));
-
+    // ---Labels for recommendation Engine inputs---
     const options = [
       { label: "* Select Your Favourite Language", value: 0 },
       { label: "1: php", value: "php" },
@@ -197,6 +192,7 @@ class ProfileAbout extends Component {
       { label: "31: AndroidStudio", value: "AndroidStudio" }
     ];
 
+    // Destructering into an Array of objects
     const objectValue = this.state.recommenderData;
     const arrayObject = Object.values(objectValue);
 
@@ -224,6 +220,7 @@ class ProfileAbout extends Component {
               Rate Your Favourite Languages
             </h3>
             <div>
+              {/* On Submit - this state */}
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   className="col-sm-4"
@@ -266,6 +263,7 @@ class ProfileAbout extends Component {
                   className="btn btn-info btn-block mt-4"
                   onClick={this.notify}
                 />
+                {/* Notification */}
                 <ToastContainer
                   position="top-right"
                   autoClose={10000}
@@ -284,9 +282,8 @@ class ProfileAbout extends Component {
                 <h3 className="text-left text-info col-sm-4">
                   Recommended For You
                 </h3>{" "}
-                {/* ID pulling */}
-                {arrayObject}
-                {this.state.recommenderOutput}
+                {/* ID pulling from state */}
+                {arrayObject} {this.state.recommenderOutput}
               </form>
             </div>
           </div>

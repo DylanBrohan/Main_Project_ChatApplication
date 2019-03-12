@@ -66,9 +66,11 @@ class AddEducation extends Component {
 
   render() {
     //   --Curley Braces pulls errors out--
+    // Destructuring
     const { errors } = this.state;
 
     return (
+      // State being pulled out from the redux store and added to props of the component
       <div className="add-education">
         <div className="container">
           <div className="row">

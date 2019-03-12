@@ -27,6 +27,7 @@ class ProfileItem extends Component {
                 <span>{profile.location}</span>
               )}
             </p>
+            {/* Router to Profile page */}
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
               View Profile
             </Link>
@@ -49,6 +50,7 @@ class ProfileItem extends Component {
     );
   }
 }
+// TypeChecking
 ProfileItem.propTypes = {
   profile: PropTypes.object.isRequired
 };
