@@ -52,7 +52,7 @@ class ProfileAbout extends Component {
         axios
           .get("/rec")
           .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({
               recommenderOutput: res.data
             });
