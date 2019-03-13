@@ -5,16 +5,21 @@ import sys
 # Needed for Mongo Client
 import pymongo
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 # Setting URI to be - 
-uri = 'mongodb://dylanbrohan:Thegodfather00@chatai-shard-00-00-hoi8f.mongodb.net:27017,chatai-shard-00-01-hoi8f.mongodb.net:27017,chatai-shard-00-02-hoi8f.mongodb.net:27017/test?ssl=true&replicaSet=ChatAi-shard-0&authSource=admin&retryWrites=true' 
+uri = 'mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai' 
 
-# Mongo connection to database collection
-MONGODB_URI = "mongodb://dylanbrohan:Thegodfather00@chatai-shard-00-00-hoi8f.mongodb.net:27017,chatai-shard-00-01-hoi8f.mongodb.net:27017,chatai-shard-00-02-hoi8f.mongodb.net:27017/test?ssl=true&replicaSet=ChatAi-shard-0&authSource=admin&retryWrites=true"
+# Mongo connection to database collection ---Atlas---
+MONGODB_URI = "mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai"
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 
+
+# mongodb://dylanbrohan:Thegodfather00@chatai-shard-00-00-hoi8f.mongodb.net:27017,chatai-shard-00-01-hoi8f.mongodb.net:27017,chatai-shard-00-02-hoi8f.mongodb.net:27017/test?ssl=true&replicaSet=ChatAi-shard-0&authSource=admin&retryWrites=true
+# test
+
 # Database
-db = client.get_database("test")
+db = client.get_database("chatai")
 # data object correlates to the collection in the database
 data = db.recommender
 
@@ -22,10 +27,13 @@ data = db.recommender
 data = pd.DataFrame(list(data.find()))
   
 #Create the Matrix Table that will be used in creating similarties
+# userId
 userItemRatingMatrix=pd.pivot_table(data, values='rating', index=['userId'], columns=['itemId'])
+
+
 # function to find the similarity between 2 users. 
-# use a correlation to do so 
-from scipy.spatial.distance import correlation 
+# ------ Test 1 Correlation Algorithm----- 
+from scipy.spatial.distance import cosine 
 def similarity(user1,user2):
     user1=np.array(user1)-np.nanmean(user1) 
     # normalizing user1 by 
@@ -43,7 +51,7 @@ def similarity(user1,user2):
     else:
         user1=np.array([user1[i] for i in commonItemIds])
         user2=np.array([user2[i] for i in commonItemIds])
-        return correlation(user1,user2)
+        return cosine(user1,user2)
     
 # Using this similarity function, find the nearest neighbours of the active user
 def nearestNeighbourRatings(activeUser,K):
@@ -114,7 +122,6 @@ def topNRecommendations(activeUser,N):
 
 
 # ---Printing top 3 recommendations---
-
 # Finding out the last user in the database by there Id
 cursor = db.recommender.find().sort([('_id', -1)]).limit(1)
 for doc in cursor:
@@ -122,3 +129,49 @@ for doc in cursor:
 # print(activeUser)
 
 print(topNRecommendations(activeUser,10))
+
+
+
+
+# # ------Test 2 Euclidean Algorithm----- 
+# from scipy.spatial.distance import euclidean 
+# def similarity(user1,user2):
+#     user1=np.array(user1)-np.nanmean(user1) 
+#     # normalizing user1 by 
+#     # the mean rating of user 1 for any Language.    
+#     #  np.nanmean() - returns the mean of an array after ignoring and NaN values 
+#     user2=np.array(user2)-np.nanmean(user2)
+#     # finds the similarity between 2 users
+#     # subset each user to be represented only by the ratings for the 
+#     # Languages the 2 users have in common 
+#     commonItemIds=[i for i in range(len(user1)) if user1[i]>0 and user2[i]>0]
+#     # Gives us languages for which both users have non NaN ratings 
+#     if len(commonItemIds)==0:
+#         # If there are no Languages in common 
+#         return 0
+#     else:
+#         user1=np.array([user1[i] for i in commonItemIds])
+#         user2=np.array([user2[i] for i in commonItemIds])
+#         return euclidean(user1,user2)
+
+
+# # ------ Test 3 Cosine Algorithm----- 
+# from scipy.spatial.distance import Cosine 
+# def similarity(user1,user2):
+#     user1=np.array(user1)-np.nanmean(user1) 
+#     # normalizing user1 by 
+#     # the mean rating of user 1 for any Language.    
+#     #  np.nanmean() - returns the mean of an array after ignoring and NaN values 
+#     user2=np.array(user2)-np.nanmean(user2)
+#     # finds the similarity between 2 users
+#     # subset each user to be represented only by the ratings for the 
+#     # Languages the 2 users have in common 
+#     commonItemIds=[i for i in range(len(user1)) if user1[i]>0 and user2[i]>0]
+#     # Gives us languages for which both users have non NaN ratings 
+#     if len(commonItemIds)==0:
+#         # If there are no Languages in common 
+#         return 0
+#     else:
+#         user1=np.array([user1[i] for i in commonItemIds])
+#         user2=np.array([user2[i] for i in commonItemIds])
+#         return Cosine(user1,user2)

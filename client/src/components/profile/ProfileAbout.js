@@ -23,7 +23,7 @@ class ProfileAbout extends Component {
     // Initial states
     super(props);
     this.state = {
-      userId: "",
+      // userId: "",
       itemId: "",
       title: "",
       rating: "",
@@ -39,7 +39,7 @@ class ProfileAbout extends Component {
     e.preventDefault();
     // Has All the profile fields
     const profileData = {
-      userId: this.state.userId,
+      // userId: this.state.userId,
       itemId: this.state.itemId,
       title: this.state.title,
       rating: this.state.rating
@@ -222,7 +222,7 @@ class ProfileAbout extends Component {
             <div>
               {/* On Submit - this state */}
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
+                {/* <TextFieldGroup
                   className="col-sm-4"
                   input="form-control-md"
                   placeholder="User ID"
@@ -230,7 +230,7 @@ class ProfileAbout extends Component {
                   info="Between 1 - 400"
                   value={this.state.userId}
                   onChange={this.onChange}
-                />{" "}
+                />{" "} */}
                 <SelectListGroup
                   placeholder="* Favourite Language"
                   name="title"
@@ -283,7 +283,8 @@ class ProfileAbout extends Component {
                   Recommended For You
                 </h3>{" "}
                 {/* ID pulling from state */}
-                {arrayObject} {this.state.recommenderOutput}
+                {arrayObject}
+                {this.state.recommenderOutput}
               </form>
             </div>
           </div>

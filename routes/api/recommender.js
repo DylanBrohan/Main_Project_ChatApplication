@@ -16,8 +16,7 @@ router.post("/recommender", (req, res) => {
   Recommender.findOne({
     userId: newRecommender.userId
   })
-    // recommender.setNext('userId', function(err, recommender){
-    // }
+
     .then(recommender => {
       // Saves
       new Recommender(newRecommender)

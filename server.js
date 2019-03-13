@@ -45,7 +45,6 @@ app.use("/api/recommender", recommender);
 if (process.env.NODE_ENV === "production") {
   // Set Static folder
   app.use(express.static("client/build"));
-
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
@@ -65,33 +64,12 @@ app.get("/rec", (req, res) => {
   });
 });
 
-app.post("/recommender", (req, res) => {
-  const newRecommender = new Recommender({
-    userId: req.body.userId,
-    itemId: req.body.itemId,
-    rating: req.body.rating,
-    title: req.body.title
-  });
-  res.send(req.body);
-  // console.log(body);
-});
-
-// app.get("/recommender", (req, res) => {
-//   res.send(req.body);
+// app.post("/recommender", (req, res) => {
 //   const newRecommender = new Recommender({
 //     userId: req.body.userId,
 //     itemId: req.body.itemId,
 //     rating: req.body.rating,
 //     title: req.body.title
 //   });
-//   console.log(body);
-// });
-
-// app.get("/rec2/:id", (req, res) => {
-//   let spawn = require("child_process").spawn;
-//   let process = spawn("python", ["recommender.py", req.params.id]);
-//   console.log(req.params.id);
-//   process.stdout.on("data", function(data) {
-//     res.send(data.toString());
-//   });
+//   res.send(req.body);
 // });

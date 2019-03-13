@@ -1,3 +1,5 @@
+// import { Mongoose } from "mongoose";
+
 // Users Authentication Model
 // --Dependecies--
 const express = require("express");
@@ -17,6 +19,15 @@ const validateLoginInput = require("../../validation/login");
 
 // Loads the user model
 const User = require("../../models/User");
+
+// function getValueForNextSequence(sequenceOfName) {
+//   var sequenceDoc = Mongoose.connection.counters.findOneAndUpdate({
+//     query: { _id: sequenceOfName },
+//     update: { $inc: { sequence_value: 1 } },
+//     new: true
+//   });
+//   return sequenceDoc.sequence_value;
+// }
 
 // res.json serves a JSON request
 // Route GET api/users/test, this tests the users route
@@ -44,6 +55,7 @@ router.post("/register", (req, res) => {
         d: "mm" //default image if none found
       });
       const newUser = new User({
+        // userId,
         name: req.body.name,
         email: req.body.email,
         avatar,
