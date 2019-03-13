@@ -38,7 +38,7 @@ var CounterSchema = Schema({
 });
 // Counter Collection
 let Counter = mongoose.model("counter", CounterSchema);
-
+// ----Pre Hook Function layout----
 RecommenderSchema.pre("save", function(next) {
   // Only increment when the document is new
   var doc = this;

@@ -8,10 +8,10 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # Setting URI to be - 
-uri = 'mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai' 
+uri = 'mongodb://dylanbrohan:Thegodfather00@chatai-shard-00-00-hoi8f.mongodb.net:27017,chatai-shard-00-01-hoi8f.mongodb.net:27017,chatai-shard-00-02-hoi8f.mongodb.net:27017/test?ssl=true&replicaSet=ChatAi-shard-0&authSource=admin&retryWrites=true' 
 
-# Mongo connection to database collection ---Atlas---
-MONGODB_URI = "mongodb://DylanBrohan:Thegodfather00@ds259463.mlab.com:59463/chatai"
+# Mongo connection to database collection ---Atlas OR MLab---
+MONGODB_URI = "mongodb://dylanbrohan:Thegodfather00@chatai-shard-00-00-hoi8f.mongodb.net:27017,chatai-shard-00-01-hoi8f.mongodb.net:27017,chatai-shard-00-02-hoi8f.mongodb.net:27017/test?ssl=true&replicaSet=ChatAi-shard-0&authSource=admin&retryWrites=true"
 client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 
 
@@ -19,7 +19,7 @@ client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
 # test
 
 # Database
-db = client.get_database("chatai")
+db = client.get_database("test")
 # data object correlates to the collection in the database
 data = db.recommender
 
