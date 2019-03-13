@@ -8,10 +8,10 @@ import SelectListGroup from "../common/SelectListGroup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 class ProfileAbout extends Component {
+  // Toast Alert settings for notify -> when button is submitted
   notify = () => {
     toast.info("Calculating Recommendation.... Please Wait a Moment....", {
       position: toast.POSITION.TOP_RIGHT,
-      position: "top-right",
       autoClose: 100000,
       hideProgressBar: false,
       rtl: false,
@@ -23,7 +23,7 @@ class ProfileAbout extends Component {
     // Initial states
     super(props);
     this.state = {
-      // userId: "",
+      userId: "",
       itemId: "",
       title: "",
       rating: "",
@@ -39,7 +39,7 @@ class ProfileAbout extends Component {
     e.preventDefault();
     // Has All the profile fields
     const profileData = {
-      // userId: this.state.userId,
+      userId: this.state.userId,
       itemId: this.state.itemId,
       title: this.state.title,
       rating: this.state.rating
@@ -242,9 +242,9 @@ class ProfileAbout extends Component {
                 <TextFieldGroup
                   className="col-sm-4"
                   input="form-control-md"
-                  placeholder="Language Tag"
+                  placeholder="Tag Number"
                   name="itemId"
-                  info="*1 - 31, eg( 1: PHP, Tag beside Language Name)*"
+                  info="*1 - 31, eg(1:php, Tag Number is beside Language Name Above)*"
                   value={this.state.itemId}
                   onChange={this.onChange}
                 />{" "}

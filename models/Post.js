@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
+    // One To Many Relationship with the users table - Connects user to their corresponding posts
     ref: "users"
   },
   text: {
@@ -22,6 +23,7 @@ const PostSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
+        // Likes reference usersId
         ref: "users"
       }
     }
@@ -53,5 +55,5 @@ const PostSchema = new Schema({
     default: Date.now
   }
 });
-
+// Export the Model to server -> Database ->
 module.exports = Post = mongoose.model("post", PostSchema);
