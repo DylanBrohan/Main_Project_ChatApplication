@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import { deleteComment } from "../../actions/postActions";
 
 class CommentItem extends Component {
+  // On Delete inside post -> comment
   onDeleteClick(postId, commentId) {
     this.props.deleteComment(postId, commentId);
   }
   render() {
+    // Destructuring from state
     const { comment, postId, auth } = this.props;
     return (
       <div className="card card-body mb-3">
@@ -25,7 +27,7 @@ class CommentItem extends Component {
           </div>
           <div className="col-md-10">
             <p className="lead">{comment.text}</p>
-
+            {/* If the comment is = to the user who posted it => show deletebutton */}
             {comment.user === auth.user.id ? (
               <button
                 onClick={this.onDeleteClick.bind(this, postId, comment._id)}
@@ -41,18 +43,19 @@ class CommentItem extends Component {
     );
   }
 }
-
+// Props required
 CommentItem.propTypes = {
   deleteComment: PropTypes.func.isRequired,
   comment: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   auth: PropTypes.object.isRequired
 };
-
+// Map state to props from redux store
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Connection to Store
 export default connect(
   mapStateToProps,
   { deleteComment }

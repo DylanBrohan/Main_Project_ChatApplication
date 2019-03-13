@@ -11,19 +11,23 @@ class Education extends Component {
     this.props.deleteEducation(id);
   }
   render() {
+    // Map through education properties and pull out id - school - degree
     const education = this.props.education.map(edu => (
       <tr key={edu._id}>
         <td>{edu.school}</td>
         <td>{edu.degree}</td>
         <td>
+          {/* If Edu to = null -> Now  */}
           <Moment format="YYYY/MM/DD">{edu.from}</Moment> -{" "}
           {edu.to === null ? (
             "Now"
           ) : (
+            // Else set date
             <Moment format="YYYY/MM/DD">{edu.to}</Moment>
           )}
         </td>
         <td>
+          {/* On Delete by education Id */}
           <button
             onClick={this.onDeleteClick.bind(this, edu._id)}
             className="btn                                  btn-danger"
@@ -44,6 +48,7 @@ class Education extends Component {
               <th>Years</th>
               <th> </th>
             </tr>
+            {/* Pulled from state */}
             {education}
           </thead>
         </table>

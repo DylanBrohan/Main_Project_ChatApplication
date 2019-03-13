@@ -2,7 +2,11 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
+// --SelectList Component--
+// Used in Forms
+
 const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
+  // Mapping through the values of a select group
   const selectOptions = options.map(option => (
     <option key={option.label} value={option.value}>
       {option.label}
@@ -32,6 +36,7 @@ const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
   );
 };
 
+// Prob checking needed
 SelectListGroup.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

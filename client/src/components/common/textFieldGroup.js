@@ -36,7 +36,7 @@ const TextFieldGroup = ({
     </div>
   );
 };
-
+// Prop Checking on state props
 TextFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
@@ -47,7 +47,7 @@ TextFieldGroup.propTypes = {
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.string
 };
-// If we dont pass it in default to this
+// Default Props if there is none
 TextFieldGroup.defaultProps = {
   type: "text"
 };

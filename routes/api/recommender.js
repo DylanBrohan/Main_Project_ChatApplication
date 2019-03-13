@@ -16,6 +16,7 @@ router.post("/recommender", (req, res) => {
   Recommender.findOne({
     userId: newRecommender.userId
   })
+    .populate("userId", ["userId"])
     .then(recommender => {
       // Saves
       new Recommender(newRecommender)

@@ -14,7 +14,7 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  // When the component mounts and is authenticated is true- redirect to dashboard
+  // When the component mounts and is authenticated is true - redirect to dashboard
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");

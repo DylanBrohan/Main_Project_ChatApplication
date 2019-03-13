@@ -24,7 +24,7 @@ export const addLike = id => dispatch => {
     );
 };
 
-// Remove Like Route
+// Remove Like Route by the userId
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
@@ -44,7 +44,7 @@ export const addPost = postData => dispatch => {
     .post("/api/posts", postData)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST to - Reducer
+        // If everything goes ok - Dispatch ADD_POST payload to - Reducer
         type: ADD_POST,
         payload: res.data
       })
@@ -64,7 +64,7 @@ export const getPosts = () => dispatch => {
     .get("/api/posts")
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST to - Reducer
+        // If everything goes ok - Dispatch GET_POST to - Reducer
         type: GET_POSTS,
         payload: res.data
       })
@@ -82,7 +82,7 @@ export const deletePost = id => dispatch => {
     .delete(`/api/posts/${id}`)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST to - Reducer
+        // If everything goes ok - Dispatch DELETE_POST to - Reducer
         type: DELETE_POST,
         payload: id
       })
@@ -102,7 +102,7 @@ export const getPost = id => dispatch => {
     .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
-        // If everything goes ok - Dispatch ADD_POST to - Reducer
+        // If everything goes ok - Dispatch GET_POST to - Reducer
         type: GET_POST,
         payload: res.data
       })
@@ -115,7 +115,7 @@ export const getPost = id => dispatch => {
     );
 };
 
-//addComment
+//addComment BY THE postId
 export const addComment = (postId, commentData) => dispatch => {
   dispatch(clearErrors());
   axios
@@ -135,7 +135,7 @@ export const addComment = (postId, commentData) => dispatch => {
     );
 };
 
-// Delete Comment
+// Delete Comment inside the postid- inside the commentid
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
     // Route to backend Server by postId

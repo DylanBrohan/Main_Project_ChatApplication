@@ -11,15 +11,18 @@ class Navbar extends Component {
     e.preventDefault();
     // This clears the profile state just as the user logs out
     this.props.clearCurrentProfile();
+    // Destroys Token
     this.props.logoutUser();
   }
 
   render() {
+    // Destructuring
     const { isAuthenticated, user } = this.props.auth;
     // Auth Links setup here
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
+          {/* Public Routes */}
           <Link className="nav-link" to="/feed">
             Post Feed{" "}
           </Link>
@@ -36,6 +39,7 @@ class Navbar extends Component {
             className="nav-link"
           >
             <img
+              // Styles of the avatar from gravatar
               className="rounded-circle"
               src={user.avatar}
               alt={user.name}

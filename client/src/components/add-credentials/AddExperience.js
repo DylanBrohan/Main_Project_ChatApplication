@@ -9,6 +9,7 @@ import { PropTypes } from "prop-types";
 import { addExperience } from "../../actions/profileActions";
 
 class AddExperience extends Component {
+  // Initial state
   constructor(props) {
     super(props);
     this.state = {
@@ -22,12 +23,12 @@ class AddExperience extends Component {
       errors: {},
       disabled: false
     };
-
+    // Binding function to state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
-
+  // When there is a update it props ->
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -38,7 +39,7 @@ class AddExperience extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // Experience Object
+    // Experience Object state
     const expData = {
       company: this.state.company,
       title: this.state.title,
@@ -72,6 +73,7 @@ class AddExperience extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              {/* Route link to dashboard(Public link) */}
               <Link to="/dashboard" className="btn btn-light">
                 Dashboard
               </Link>
@@ -82,6 +84,7 @@ class AddExperience extends Component {
               </p>
               <small className="d-block.pb-3">* = Required Fields</small>
               <form onSubmit={this.onSubmit}>
+                {/* Components called -> */}
                 <TextFieldGroup
                   placeholder="* Company"
                   name="company"
@@ -89,6 +92,7 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.company}
                 />
+                {/* Setting values for each state within form */}
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
@@ -143,6 +147,7 @@ class AddExperience extends Component {
                     error={errors.decription}
                     info="Tell us about the position"
                   />
+                  {/* On submit -> values into state */}
                   <input
                     type="submit"
                     value="Submit"

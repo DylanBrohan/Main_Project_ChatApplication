@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// Redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
@@ -13,7 +14,7 @@ import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 
 class CreateProfile extends Component {
-  // Component state values
+  // Component state values(Initial)
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +35,7 @@ class CreateProfile extends Component {
       //   Get errors from redux state
       errors: {}
     };
-
+    // Bind to state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -146,6 +147,7 @@ class CreateProfile extends Component {
     if (displaySocialInputs) {
       socialInputs = (
         <div>
+          {/* Input group components */}
           <InputGroup
             placeholder="Twitter Profile Url"
             name="twitter"

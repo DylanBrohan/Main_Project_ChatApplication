@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { Link } from "react-router-dom";
+// PostAction
 import { getPost } from "../../actions/postActions";
 import PostItem from "../posts/PostItem";
 import CommentForm from "./CommentForm";
 import CommentFeed from "./CommentFeed";
+
 class Post extends Component {
   // Call the action from post action
   componentDidMount() {
@@ -22,6 +24,7 @@ class Post extends Component {
     } else {
       postContent = (
         <div>
+          {/* Displaying post content by its corresponding Id */}
           <PostItem post={post} showActions={false} />
           <CommentForm postId={post._id} />
           <CommentFeed postId={post._id} comments={post.comments} />
@@ -33,6 +36,7 @@ class Post extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
+              {/* Public Route */}
               <Link to="/feed" className="btn btn-light mb-3">
                 Back to Feed
               </Link>

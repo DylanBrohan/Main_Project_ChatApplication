@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 // Comment item takes care of displaying each comment
 import CommentItem from "./CommentItem";
-// CommentFeed takes care of mapping through the comments
 class CommentFeed extends Component {
   render() {
     const { comments, postId } = this.props;
-
+    // CommentFeed takes care of mapping through the comments
     return comments.map(comment => (
       <CommentItem key={comment._id} comment={comment} postId={postId} />
     ));

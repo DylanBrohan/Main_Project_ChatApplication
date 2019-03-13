@@ -20,17 +20,18 @@ class Register extends Component {
       password2: "",
       errors: {}
     };
-    // Links each of the fields to the components state
+    // Binds each of the fields to the components state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // When the component runs if they are authenticated go to -> Dashboard route
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
   }
-
+  // Update in state ->
   componentWillReceiveProps(nextProps) {
     // Check for an error prop
     if (nextProps.errors) {
@@ -57,7 +58,7 @@ class Register extends Component {
   }
   //   <-- Register -->
   render() {
-    // If we have errors
+    // Destructuring errors from state
     const { errors } = this.state;
     return (
       <div className="register">
@@ -66,6 +67,7 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your ChatAI Account</p>
+              {/* On Submit -> State of the values */}
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Name"

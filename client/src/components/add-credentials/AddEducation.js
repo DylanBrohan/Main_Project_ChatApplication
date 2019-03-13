@@ -5,6 +5,7 @@ import TextFieldGroup from "../common/textFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 // Redux Connection
 import { connect } from "react-redux";
+// Prop Checking
 import { PropTypes } from "prop-types";
 import { addEducation } from "../../actions/profileActions";
 
@@ -66,7 +67,7 @@ class AddEducation extends Component {
 
   render() {
     //   --Curley Braces pulls errors out--
-    // Destructuring
+    // Destructuring of errors-->
     const { errors } = this.state;
 
     return (
@@ -75,6 +76,7 @@ class AddEducation extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              {/* Route to Dashboard */}
               <Link to="/dashboard" className="btn btn-light">
                 Dashboard
               </Link>
@@ -84,6 +86,7 @@ class AddEducation extends Component {
                 Add any Education you have Attended
               </p>
               <small className="d-block.pb-3">* = Required Fields</small>
+              {/* On submit grab states from value */}
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* School"

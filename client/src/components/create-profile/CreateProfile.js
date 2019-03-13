@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // Router
 import { withRouter } from "react-router-dom";
+// Action
 import { createProfile } from "../../actions/profileActions";
 
 // Input Components
@@ -34,7 +35,7 @@ class CreateProfile extends Component {
       //   Get errors from redux state
       errors: {}
     };
-
+    // Binding to state
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -66,7 +67,7 @@ class CreateProfile extends Component {
     // Redux actions are always in the Props
     this.props.createProfile(profileData, this.props.history);
   }
-
+  // On change ->
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -143,6 +144,7 @@ class CreateProfile extends Component {
                 Add Information to make your profile
               </p>
               <small className="d-block pb-3">* = required fields</small>
+              {/* Submit all values in state when pressed */}
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"

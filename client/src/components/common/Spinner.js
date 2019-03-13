@@ -6,6 +6,7 @@ export default () => {
   return (
     <div>
       <img
+        // Spinner.GiF Image
         src={spinner}
         style={{ width: "200px", margin: "auto", display: "block" }}
         alt="Loading..."

@@ -80,6 +80,8 @@ class App extends Component {
             {/* Switch allows to redirect when logout is clicked */}
 
             <Switch>
+              {/* Private Routes */}
+              {/* Only seen when user id is Logged in */}
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>

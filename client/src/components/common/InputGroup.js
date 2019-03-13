@@ -1,6 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+
+// --Input Group Component--
+
 // Initial state in component
 const InputGroup = ({
   name,

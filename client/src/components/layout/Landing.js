@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
 class Landing extends Component {
-  // When this component runs & is authenticated redirect ot dashboard
+  // When this component runs & is authenticated redirect to dashboard
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -25,6 +25,7 @@ class Landing extends Component {
                   Recommendations on what Technolgies you should pursue.
                 </p>
                 <hr />
+                {/* Public Routes -> */}
                 <Link to="/register" className="btn btn-lg btn-info mr-2">
                   Sign Up
                 </Link>

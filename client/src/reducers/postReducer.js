@@ -5,7 +5,7 @@ import {
   GET_POSTS,
   GET_POST
 } from "../actions/types";
-
+// Initial State
 const initialState = {
   posts: [],
   post: {},
@@ -13,6 +13,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+  // Rules for Posts state management
   switch (action.type) {
     case POST_LOADING:
       return {
