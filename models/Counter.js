@@ -1,38 +1,11 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+// ----Tried to Implement One-Many from User model - Recommender model,
+// However the update in the counter prevented this from happening
 
-// User schema
-const UserSchema = new Schema(
-  {
-    // Defining my fields
-    userId: {
-      type: Number
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    avatar: {
-      type: String
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
-  }
-  // { userId: false }
-);
+// const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
 
 // // ---Counter Schema in database
-// const CounterSchema = Schema({
+// var CounterSchema = Schema({
 //   // Countains 2 values that auto increment the userId field
 //   _id: { type: String, required: true, default: "itemId" },
 //   seq: { type: Number, default: 10656 }
@@ -40,9 +13,9 @@ const UserSchema = new Schema(
 // // Counter Collection
 // let Counter = mongoose.model("counter", CounterSchema);
 // // ----Pre Hook Function layout----
-// UserSchema.pre("save", function(next) {
+// CounterSchema.pre("save", function(next) {
 //   // Only increment when the document is new
-//   const doc = this;
+//   var doc = this;
 //   // Counter Find the Id and increment it by 1
 //   Counter.findOneAndUpdate(
 //     { _id: "itemId" },
@@ -73,9 +46,4 @@ const UserSchema = new Schema(
 //   );
 // });
 
-// module.exports = {
-//   User: mongoose.model("user", UserSchema),
-//   Counter: mongoose.model("counter", CounterSchema)
-// };
-
-module.exports = User = mongoose.model("user", UserSchema);
+// module.exports = Counter = mongoose.model("counter", CounterSchema);

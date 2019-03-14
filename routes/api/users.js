@@ -1,5 +1,3 @@
-// import { Mongoose } from "mongoose";
-
 // Users Authentication Model
 // --Dependecies--
 const express = require("express");
@@ -19,6 +17,7 @@ const validateLoginInput = require("../../validation/login");
 
 // Loads the user model
 const User = require("../../models/User");
+const Counter = require("../../models/Counter");
 
 // res.json serves a JSON request
 // Route GET api/users/test, this tests the users route
