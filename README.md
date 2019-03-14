@@ -34,7 +34,9 @@ _Client_
 
 ## Authors
 
-- **Dylan Brohan** - _Initial work_ - [DylanBrohan](https://github.com/DylanBrohan)
+- **Dylan Brohan** - _Initial work_ - [DylanBrohan]
+  **Git Hub Link -> May not be upto date but instructions are below**
+  (https://github.com/DylanBrohan)
 
 ## Application Instructions
 
