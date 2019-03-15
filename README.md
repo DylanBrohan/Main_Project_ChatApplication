@@ -2,6 +2,7 @@ This project is hosted on [Heroku -ChatAI](https://agile-mesa-13571.herokuapp.co
 
 ## ChatAI
 
+**Finished Application**
 Final Year Project: ChatAI is a social Media Application for Tech Lovers and Programmers alike. This Application allows 'Tech Savy' users to create a secure account, add information to their profile including their Education, Work Experiences and Skill set. The user has the control to Edit these details at any time they wish ! ChatAI includes a Messaging system that allows all users to connect and interact with people who are also interested in the same means. The user can also delete their details whenever they chose and browse other people accounts freely.
 
 **This Application uses Redux to control statemanagement throughout the application and has Server & Client Side Security using Passport & JWTs**
@@ -35,7 +36,7 @@ _Client_
 ## Authors
 
 - **Dylan Brohan** - _Initial work_ - [DylanBrohan]
-  **Git Hub Link -> May not be upto date but instructions are below**
+  \*\*Git Hub Link -> Up to Date -> Finished Application
   (https://github.com/DylanBrohan)
 
 ## Application Instructions
